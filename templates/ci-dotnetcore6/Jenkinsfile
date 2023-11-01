@@ -1,0 +1,69 @@
+@Library("dso-shared-lib@main") _
+def podYaml = libraryResource "podTemplates/dotnetcore6-agent.yaml"
+pipeline {
+    agent{
+        kubernetes {
+            yaml podYaml
+        }
+    }
+    stages{
+        stage ("init"){
+            steps {
+                container ("base-agent"){
+                    script{
+                        git credentialsId: "github_creds" , url: "${github_repo}"
+                        init()
+                    }
+                }
+            }
+        }
+         stage ("dotnet build"){
+            steps {
+                container ("dotnetcore6"){
+                    script{
+                        dotnet.build()
+                    }
+                }
+            }
+        }
+         stage ("dotnet test"){
+            steps {
+                container ("dotnetcore6"){
+                    script{
+                        dotnet.test()
+                    }
+                }
+            }
+        }
+         stage ("sonarqube scan"){
+            steps {
+                container ("sonarqube"){
+                    script{
+                        sonarqube.scan()
+                    }
+                }
+            }
+        }
+         stage ("kaniko upload"){
+            steps {
+                container ("kaniko"){
+                    script{
+                        kaniko.upload()
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            script{
+                notification.success()
+            }
+        }
+        failure {
+            script{
+                notification.failure()
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+version: 1
+type: pipeline-template
+templateType: MULTIBRANCH
+name: dotNet Core 6 Pipeline Job
+description: Simple Java App With Maven
+parameters:
+  - name: emailRecipient
+    type: string
+    displayName: Email address to be used for sending build notifications
+  - name: github_repo
+    type: string
+    displayName: GitHub HTTPS repo endpoint
+multibranch:
+  branchSource:
+    git:
+      remote: ${github_repo}
+  orphanedItemStrategy:
+    daysToKeep: 3
