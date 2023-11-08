@@ -10,6 +10,34 @@ parameters:
   - name: github_repo
     type: string
     displayName: GitHub HTTPS repo endpoint
+  - name: app_name
+    type: string
+    displayName: Name of your application
+  - name: tech
+    type: string
+    displayName: Name of the Tech Stack
+  - name: ghOrg
+    type: string
+    displayName: Name of your Github Org
+  - name: sq_project_key
+    type: string
+    displayName: Sonarqube project key
+  - name: docker_args
+    type: string
+    displayName: Docker arguments
+  - name: docker_path
+    type: string
+    displayName: Path to the docker repo
+  - name: artifactory_repo
+    type: string
+    displayName: Name of the artifactory repo
+  - name: work_directory
+    type: string
+    displayName: Name of the working directory
+  - name: docker_file
+    type: string
+    displayName: Name of the Docker file
+   
 multibranch:
   branchSource:
     git:

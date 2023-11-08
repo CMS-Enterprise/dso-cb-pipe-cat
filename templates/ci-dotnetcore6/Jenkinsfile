@@ -39,7 +39,15 @@ pipeline {
             steps {
                 container ("sonarqube"){
                     script{
-                        sonarqube.scan()
+                        def properties=[
+                            appName: "${app_name}",
+                            tech: "${tech}",
+                            ghOrg: "${gh_org}",
+                            sonarqube: [
+                                projectKey: "${sq_project_key}"
+                            ]
+                        ]                        
+                        sonarqube.scan("${properties}")
                     }
                 }
             }
@@ -48,7 +56,18 @@ pipeline {
             steps {
                 container ("kaniko"){
                     script{
-                        kaniko.upload()
+                        def properties=[
+                            appName: "${app_name}",
+                            tech: "${tech}",
+                            build: [
+                                dockerargs: "${docker_args}",
+                                dockerPath: "${docker_path}",
+                                repo: "${artifactory_repo}",
+                                workDir: "${work_directory}",
+                                dockerFile: "${docker_file}"
+                            ]
+                        ]
+                        kaniko.upload("${properties}")
                     }
                 }
             }
