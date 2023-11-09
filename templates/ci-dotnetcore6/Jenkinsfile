@@ -61,8 +61,7 @@ pipeline {
                             tech: "${tech}",
                             build: [
                                 dockerargs: "${docker_args}",
-                                dockerPath: "${docker_path}",
-                                repo: "${artifactory_repo}",
+                                artifactoryPath: "${artifactory_path}",
                                 workDir: "${work_directory}",
                                 dockerFile: "${docker_file}"
                             ]
