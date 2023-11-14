@@ -39,6 +39,5 @@ multibranch:
   branchSource:
     git:
       remote: ${github_repo}
-      credentialId: "cms-gitent-abdul-creds"
-  orphanedItemStrategy:
+      credentialId: "git_token"
     daysToKeep: 3
