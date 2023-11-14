@@ -11,8 +11,8 @@ pipeline {
             steps {
                 container ("base-agent"){
                     script{
-                        git credentialsId: "github_creds" , url: "${github_repo}"
-                        init()
+                        git credentialsId: "cms-gitent-abdul-creds" , url: "${github_repo}"
+ //                       init()
                     }
                 }
             }
