@@ -40,4 +40,5 @@ multibranch:
     git:
       remote: ${github_repo}
       credentialId: "git_token"
+  orphanedItemStrategy:
     daysToKeep: 3
