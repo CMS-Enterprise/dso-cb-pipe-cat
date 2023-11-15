@@ -42,6 +42,6 @@ multibranch:
     github:
       repoOwner: CMSgov
       repository: cmscloud-infra-jenkins-examples
-      credentialId: "git_token"
+      credentialsId: "git_token"
   orphanedItemStrategy:
     daysToKeep: 3
