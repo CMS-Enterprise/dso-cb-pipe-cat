@@ -10,10 +10,8 @@ pipeline {
         stage ("init"){
             steps {
                 container ("base-agent"){
-                    script{
-                        git credentialsId: "cms-gitent-abdul-creds" , url: "${github_repo}"
+                    git credentialsId: "cms-gitent-abdul-creds" , url: "${github_repo}"
  //                       init()
-                    }
                 }
             }
         }
