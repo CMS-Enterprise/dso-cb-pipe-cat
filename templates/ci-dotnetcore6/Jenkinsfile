@@ -9,7 +9,7 @@ pipeline {
     stages{
         stage ("init"){
             steps {
-                container ("base-agent"){
+                container ("jnlp"){
                     // git credentialsId: "cms-gitent-abdul-creds" , url: "${github_repo}"
                     sh "echo init"
  //                       init()
