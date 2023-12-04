@@ -1,5 +1,17 @@
-def kproperties=[:]
-def properties=[:]
+def properties=[
+    appName: "${app_name}",
+    tech: "${tech}",
+    ghOrg: "${gh_org}",
+    sonarqube: [
+        projectKey: "${sq_project_key}"
+    ]
+    build: [
+        dockerargs: "${docker_args}",
+        artifactoryPath: "${artifactory_path}",
+        workDir: "${work_directory}",
+        dockerFile: "${docker_file}"
+    ]
+] 
 @Library("dso-shared-lib@main") _
 def podYaml = libraryResource "podTemplates/dotnetcore6-agent.yaml"
 pipeline {
@@ -40,14 +52,14 @@ pipeline {
             steps {
                 container ("sonarqube"){
                     script{
-                        properties=[
-                            appName: "${app_name}",
-                            tech: "${tech}",
-                            ghOrg: "${gh_org}",
-                            sonarqube: [
-                                projectKey: "${sq_project_key}"
-                            ]
-                        ]                        
+                        // properties=[
+                        //     appName: "${app_name}",
+                        //     tech: "${tech}",
+                        //     ghOrg: "${gh_org}",
+                        //     sonarqube: [
+                        //         projectKey: "${sq_project_key}"
+                        //     ]
+                        // ]                        
                         sonarqube.scan("${properties}")
                     }
                 }
@@ -57,17 +69,17 @@ pipeline {
             steps {
                 container ("kaniko"){
                     script{
-                        kproperties=[
-                            appName: "${app_name}",
-                            tech: "${tech}",
-                            build: [
-                                dockerargs: "${docker_args}",
-                                artifactoryPath: "${artifactory_path}",
-                                workDir: "${work_directory}",
-                                dockerFile: "${docker_file}"
-                            ]
-                        ]
-                        kaniko.upload("${kproperties}")
+                        // kproperties=[
+                        //     appName: "${app_name}",
+                        //     tech: "${tech}",
+                        //     build: [
+                        //         dockerargs: "${docker_args}",
+                        //         artifactoryPath: "${artifactory_path}",
+                        //         workDir: "${work_directory}",
+                        //         dockerFile: "${docker_file}"
+                        //     ]
+                        // ]
+                        kaniko.upload("${properties}")
                     }
                 }
             }
