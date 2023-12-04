@@ -16,7 +16,7 @@ parameters:
   - name: tech
     type: string
     displayName: Name of the Tech Stack
-  - name: ghOrg
+  - name: gh_org
     type: string
     displayName: Name of your Github Org
   - name: sq_project_key
