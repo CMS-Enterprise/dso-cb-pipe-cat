@@ -1,4 +1,4 @@
-def properties=[
+def Map properties=[
     appName: "${app_name}",
     tech: "${tech}",
     ghOrg: "${gh_org}",
@@ -60,7 +60,7 @@ pipeline {
                         //         projectKey: "${sq_project_key}"
                         //     ]
                         // ]                        
-                        sonarqube.scan("${properties}")
+                        sonarqube.scan(properties)
                     }
                 }
             }
