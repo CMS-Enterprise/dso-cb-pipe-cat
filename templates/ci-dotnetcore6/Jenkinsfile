@@ -55,7 +55,7 @@ pipeline {
             steps {
                 container ("kaniko"){
                     script{
-                        def properties=[
+                        def kproperties=[
                             appName: "${app_name}",
                             tech: "${tech}",
                             build: [
@@ -65,7 +65,7 @@ pipeline {
                                 dockerFile: "${docker_file}"
                             ]
                         ]
-                        kaniko.upload("${properties}")
+                        kaniko.upload("${kproperties}")
                     }
                 }
             }
