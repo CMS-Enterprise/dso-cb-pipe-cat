@@ -4,7 +4,7 @@ def properties=[
     ghOrg: "${gh_org}",
     sonarqube: [
         projectKey: "${sq_project_key}"
-    ]
+    ],
     build: [
         dockerargs: "${docker_args}",
         artifactoryPath: "${artifactory_path}",
