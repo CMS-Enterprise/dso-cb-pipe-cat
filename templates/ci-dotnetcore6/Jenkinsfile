@@ -79,7 +79,7 @@ pipeline {
                         //         dockerFile: "${docker_file}"
                         //     ]
                         // ]
-                        kaniko.upload("${properties}")
+                        kaniko.push(properties)
                     }
                 }
             }
