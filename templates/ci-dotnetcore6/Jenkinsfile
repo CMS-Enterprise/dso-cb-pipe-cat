@@ -48,23 +48,23 @@ pipeline {
                 }
             }
         }
-         stage ("sonarqube scan"){
-            steps {
-                container ("sonarqube"){
-                    script{
-                        // properties=[
-                        //     appName: "${app_name}",
-                        //     tech: "${tech}",
-                        //     ghOrg: "${gh_org}",
-                        //     sonarqube: [
-                        //         projectKey: "${sq_project_key}"
-                        //     ]
-                        // ]                        
-                        sonarqube.scan(properties)
-                    }
-                }
-            }
-        }
+        //  stage ("sonarqube scan"){
+        //     steps {
+        //         container ("sonarqube"){
+        //             script{
+        //                 // properties=[
+        //                 //     appName: "${app_name}",
+        //                 //     tech: "${tech}",
+        //                 //     ghOrg: "${gh_org}",
+        //                 //     sonarqube: [
+        //                 //         projectKey: "${sq_project_key}"
+        //                 //     ]
+        //                 // ]                        
+        //                 sonarqube.scan(properties)
+        //             }
+        //         }
+        //     }
+        // }
          stage ("kaniko upload"){
             steps {
                 container ("kaniko"){
