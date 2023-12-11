@@ -47,15 +47,15 @@ pipeline {
                 }
             }
         }
-         stage ("sonarqube scan"){
-            steps {
-                container ("sonarqube"){
-                    script{               
-                        sonarqube.scan(properties)
-                    }
-                }
-            }
-        }
+        //  stage ("sonarqube scan"){
+        //     steps {
+        //         container ("sonarqube"){
+        //             script{               
+        //                 sonarqube.scan(properties)
+        //             }
+        //         }
+        //     }
+        // }
          stage ("kaniko upload"){
             steps {
                 container ("kaniko"){
@@ -69,12 +69,12 @@ pipeline {
     post {
         success {
             script{
-                notification.success()
+                notification.success(properties)
             }
         }
         failure {
             script{
-                notification.failure()
+                notification.failure(properties)
             }
         }
     }
