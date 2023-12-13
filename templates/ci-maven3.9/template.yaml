@@ -16,16 +16,16 @@ parameters:
   - name: tech
     type: string
     displayName: Name of the Tech Stack
-  - name: javaVersion
+  - name: java_version
     type: string
     displayName: Java Version
-  - name: buildArgs
+  - name: build_args
     type: string
     displayName: Maven Compile arguments
-  - name: testArgs
+  - name: test_args
     type: string
     displayName: Maven Test arguments
-  - name: packageArgs
+  - name: package_args
     type: string
     displayName: Maven Package arguments
   - name: gh_org

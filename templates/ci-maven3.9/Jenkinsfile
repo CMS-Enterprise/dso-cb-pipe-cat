@@ -1,10 +1,10 @@
 def Map properties=[
     appName: "${app_name}",
     tech: "${tech}",
-    javaVersion: "${javaVersion}",
-    buildArgs: "${buildArgs}",
-    testArgs: "${testArgs}",
-    packageArgs: "${packageArgs}",
+    javaVersion: "${java_version}",
+    buildArgs: "${build_args}",
+    testArgs: "${test_args}",
+    packageArgs: "${package_args}",
     ghOrg: "${gh_org}",
     sonarqube: [
         projectKey: "${sq_project_key}"
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 container ("maven"){
                     script{
-                        maven.compile()
+                        maven.compile(properties.buildArgs)
                     }
                 }
             }
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 container ("maven"){
                     script{
-                        maven.test()
+                        maven.test(properties.testArgs)
                     }
                 }
             }
@@ -55,20 +55,20 @@ pipeline {
             steps {
                 container ("maven"){
                     script{
-                        maven.mvnPackage()
+                        maven.mvnPackage(properties.packageArgs)
                     }
                 }
             }
         }
-        //  stage ("sonarqube scan"){
-        //     steps {
-        //         container ("sonarqube"){
-        //             script{               
-        //                 sonarqube.scan(properties)
-        //             }
-        //         }
-        //     }
-        // }
+         stage ("sonarqube scan"){
+            steps {
+                container ("sonarqube"){
+                    script{               
+                        sonarqube.scan(properties)
+                    }
+                }
+            }
+        }
          stage ("kaniko upload"){
             steps {
                 container ("kaniko"){
