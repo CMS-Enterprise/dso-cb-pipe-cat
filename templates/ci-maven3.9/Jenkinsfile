@@ -17,7 +17,7 @@ def Map properties=[
     ]
 ] 
 @Library("dso-shared-lib@main") _
-def podYaml = libraryResource "podTemplates/${tech}-${javaVersion}-agent.yaml"
+def podYaml = libraryResource "podTemplates/${properties.tech}-${properties.javaVersion}-agent.yaml"
 pipeline {
     agent{
         kubernetes {
