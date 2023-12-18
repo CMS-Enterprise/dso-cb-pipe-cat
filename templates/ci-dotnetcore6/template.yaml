@@ -40,8 +40,8 @@ multibranch:
     # git:
       # remote: ${github_repo}
     github:
-      repoOwner: CMSgov
-      repository: cmscloud-infra-jenkins-examples
+      repoOwner: ${gh_org}
+      repository: ${github_repo}
       credentialsId: "git_token"
   orphanedItemStrategy:
     daysToKeep: 3
