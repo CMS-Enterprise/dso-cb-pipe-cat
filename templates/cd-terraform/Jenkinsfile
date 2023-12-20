@@ -1,0 +1,68 @@
+def Map properties=[
+    appName: "${app_name}",
+    tech: "${tech}",
+    ghOrg: "${gh_org}",
+    deploy: [
+        workDir: "${work_directory}",
+        tfVar: "${tf_var_file}",
+        backendConfigFile: "${backend_config_file}"
+    ]
+] 
+@Library("dso-shared-lib@main") _
+def podYaml = libraryResource "podTemplates/terraform-agent.yaml"
+pipeline {
+    agent{
+        kubernetes {
+            yaml podYaml
+        }
+    }
+    stages{
+        stage ("init"){
+            steps {
+                container ("jnlp"){
+                    sh "echo init"
+ //                       init()
+                }
+            }
+        }
+         stage ("tfinit"){
+            steps {
+                container ("terraform"){
+                    script{
+                        terrafrom.init(properties.deploy)
+                    }
+                }
+            }
+        }
+         stage ("tfplan"){
+            steps {
+                container ("terraform"){
+                    script{
+                        terrafrom.plan(properties.deploy)
+                    }
+                }
+            }
+        }
+         stage ("tfapply"){
+            steps {
+                container ("terraform"){
+                    script{               
+                        terraform.apply(properties.deploy)
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            script{
+                notification.success(properties)
+            }
+        }
+        failure {
+            script{
+                notification.failure(properties)
+            }
+        }
+    }
+}
