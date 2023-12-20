@@ -30,7 +30,7 @@ pipeline {
             steps {
                 container ("terraform"){
                     script{
-                        terrafrom.init(properties.deploy)
+                        terraform.init(properties.deploy)
                     }
                 }
             }
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 container ("terraform"){
                     script{
-                        terrafrom.plan(properties.deploy)
+                        terraform.plan(properties.deploy)
                     }
                 }
             }
