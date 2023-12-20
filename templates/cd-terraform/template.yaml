@@ -19,6 +19,10 @@ parameters:
   - name: gh_org
     type: string
     displayName: Name of your Github Org
+  - name: aws_role_arn
+    type: string
+    default: arn:aws:iam::280350076387:role/cbc-devops
+    displayName: Provide AWS service account role arn
   - name: work_directory
     type: string
     displayName: Name of the working directory
