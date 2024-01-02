@@ -28,7 +28,7 @@ pipeline {
         }
          stage ("tfinit"){
             steps {
-                container ("terraform"){
+                container ("base-agent"){
                     script{
                         terraform.init(properties.deploy)
                     }
@@ -37,7 +37,7 @@ pipeline {
         }
          stage ("tfplan"){
             steps {
-                container ("terraform"){
+                container ("base-agent"){
                     script{
                         terraform.plan(properties.deploy)
                     }
@@ -46,7 +46,7 @@ pipeline {
         }
          stage ("tfapply"){
             steps {
-                container ("terraform"){
+                container ("base-agent"){
                     script{               
                         terraform.apply(properties.deploy)
                     }
