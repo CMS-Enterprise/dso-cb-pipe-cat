@@ -21,7 +21,7 @@ parameters:
     displayName: Name of your Github Org
   - name: aws_role_arn
     type: string
-    default: arn:aws:iam::280350076387:role/cbc-devops
+    default: arn:aws:iam::280350076387:role/delegatedadmin/developer/jenkins-role
     displayName: Provide AWS service account role arn
   - name: work_directory
     type: string
