@@ -1,0 +1,75 @@
+def Map properties=[
+    appName: "${app_name}",
+    tech: "${tech}",
+    javaVersion: "${java_version}",
+    buildArgs: "${build_args}",
+    ghOrg: "${gh_org}",
+    // TODO: idk if we need these??
+    sonarqube: [
+        projectKey: "${sq_project_key}"
+    ],
+    build: [
+        dockerargs: "${docker_args}",
+        artifactoryPath: "${artifactory_path}",
+        workDir: "${work_directory}",
+        dockerFile: "${docker_file}"
+    ]
+] 
+@Library("dso-shared-lib@main") _
+def podYaml = libraryResource "podTemplates/gradle8.5-agent.yaml"
+pipeline {
+    agent{
+        kubernetes {
+            yaml podYaml
+        }
+    }
+    stages{
+        stage ("init"){
+            steps {
+                container ("jnlp"){
+                    sh "echo init"
+ //                       init()
+                }
+            }
+        }
+        stage ("gradle build"){
+            steps {
+                container ("gradle"){
+                    script{
+                        gradle.gradleBuild(properties.buildArgs)
+                    }
+                }
+            }
+        }
+         stage ("sonarqube scan"){
+            steps {
+                container ("sonarqube"){
+                    script{               
+                        sonarqube.scan(properties)
+                    }
+                }
+            }
+        }
+         stage ("kaniko upload"){
+            steps {
+                container ("kaniko"){
+                    script{
+                        kaniko.push(properties)
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            script{
+                notification.success(properties)
+            }
+        }
+        failure {
+            script{
+                notification.failure(properties)
+            }
+        }
+    }
+}

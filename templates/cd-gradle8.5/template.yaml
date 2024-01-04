@@ -1,0 +1,54 @@
+version: 1
+type: pipeline-template
+templateType: MULTIBRANCH
+name: Gradle Pipeline Job
+description: Simple CD with Gradle
+parameters:
+  - name: emailRecipient
+    type: string
+    displayName: Email address to be used for sending build notifications
+  - name: github_repo
+    type: string
+    displayName: GitHub HTTPS repo endpoint
+  - name: app_name
+    type: string
+    displayName: Name of your application
+  - name: tech
+    type: string
+    displayName: Name of the Tech Stack
+  - name: build_args
+    type: string
+    displayName: Gradle Build arguments
+  - name: gh_org
+    type: string
+    displayName: Name of your Github Org
+  - name: work_directory
+    type: string
+    displayName: Name of the working directory
+    # TODO: idk if we need these??
+  - name: sq_project_key
+    type: string
+    displayName: Sonarqube project key
+  - name: docker_args
+    type: string
+    displayName: Docker arguments
+  - name: artifactory_path
+    type: string
+    displayName: path to artifactory in artifactory 
+  - name: work_directory
+    type: string
+    displayName: Name of the working directory
+  - name: docker_file
+    type: string
+    displayName: Name of the Docker file
+   
+multibranch:
+  branchSource:
+    # git:
+      # remote: ${github_repo}
+    github:
+      repoOwner: ${gh_org}
+      repository: ${github_repo}
+      credentialsId: "git_token"
+  orphanedItemStrategy:
+    daysToKeep: 3
