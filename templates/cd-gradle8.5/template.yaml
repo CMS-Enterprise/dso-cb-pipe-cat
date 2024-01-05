@@ -35,9 +35,6 @@ parameters:
   - name: artifactory_path
     type: string
     displayName: path to artifactory in artifactory 
-  - name: work_directory
-    type: string
-    displayName: Name of the working directory
   - name: docker_file
     type: string
     displayName: Name of the Docker file
