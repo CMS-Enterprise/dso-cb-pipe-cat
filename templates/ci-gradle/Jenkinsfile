@@ -5,7 +5,6 @@ def Map properties=[
     testArgs: "${test_args}",
     javaVersion: "${java_version}",
     ghOrg: "${gh_org}",
-    // TODO: idk if we need these??
     sonarqube: [
         projectKey: "${sq_project_key}"
     ],

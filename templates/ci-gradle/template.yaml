@@ -31,7 +31,6 @@ parameters:
   - name: work_directory
     type: string
     displayName: Name of the working directory
-    # TODO: idk if we need these??
   - name: sq_project_key
     type: string
     displayName: Sonarqube project key
