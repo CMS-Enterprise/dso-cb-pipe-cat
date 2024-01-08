@@ -2,6 +2,8 @@ def Map properties=[
     appName: "${app_name}",
     tech: "${tech}",
     buildArgs: "${build_args}",
+    testArgs: "${test_args}",
+    javaVersion: "${java_version}",
     ghOrg: "${gh_org}",
     // TODO: idk if we need these??
     sonarqube: [
@@ -15,7 +17,7 @@ def Map properties=[
     ]
 ] 
 @Library("dso-shared-lib@main") _
-def podYaml = libraryResource "podTemplates/gradle8.5-agent.yaml"
+def podYaml = libraryResource "podTemplates/gradle-java${properties.javaVersion}-agent.yaml"
 pipeline {
     agent{
         kubernetes {
@@ -26,8 +28,9 @@ pipeline {
         stage ("init"){
             steps {
                 container ("jnlp"){
-                    sh "echo init"
- //                       init()
+                    script{
+                        gradle.setGradlePropsFile()
+                    }
                 }
             }
         }
@@ -36,6 +39,16 @@ pipeline {
                 container ("gradle"){
                     script{
                         gradle.gradleBuild(properties.buildArgs)
+                    }
+                }
+            }
+        }
+        stage ("gradle test"){
+            steps {
+                container ("gradle"){
+                    script{
+                        gradle.gradleTest(properties.testArgs)
+                        gradle.removeGradlePropsFile()
                     }
                 }
             }

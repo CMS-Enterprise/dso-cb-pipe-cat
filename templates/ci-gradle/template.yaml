@@ -16,9 +16,15 @@ parameters:
   - name: tech
     type: string
     displayName: Name of the Tech Stack
+  - name: java_version
+    type: string
+    displayName: Java version
   - name: build_args
     type: string
     displayName: Gradle Build arguments
+  - name: test_args
+    type: string
+    displayName: Gradle Test arguments
   - name: gh_org
     type: string
     displayName: Name of your Github Org
