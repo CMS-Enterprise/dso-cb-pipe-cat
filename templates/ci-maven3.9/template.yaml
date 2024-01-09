@@ -37,6 +37,9 @@ parameters:
   - name: docker_args
     type: string
     displayName: Docker arguments
+  - name: org_id
+    type: string
+    displayName: Snyk org id
   - name: artifactory_path
     type: string
     displayName: path to artifactory in artifactory 
