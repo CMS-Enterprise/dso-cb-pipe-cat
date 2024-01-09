@@ -13,6 +13,9 @@ def Map properties=[
         artifactoryPath: "${artifactory_path}",
         workDir: "${work_directory}",
         dockerFile: "${docker_file}"
+    ],
+    snyk: [
+        orgId: "${org_id}"
     ]
 ] 
 @Library("dso-shared-lib@main") _
@@ -57,6 +60,15 @@ pipeline {
                 container ("sonarqube"){
                     script{               
                         sonarqube.scan(properties)
+                    }
+                }
+            }
+        }
+         stage ("snyk"){
+            steps {
+                container ("snyk"){
+                    script{               
+                        snyk.snykTest(properties)
                     }
                 }
             }
