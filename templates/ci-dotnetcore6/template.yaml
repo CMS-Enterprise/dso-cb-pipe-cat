@@ -22,6 +22,9 @@ parameters:
   - name: sq_project_key
     type: string
     displayName: Sonarqube project key
+  - name: org_id
+    type: string
+    displayName: Snyk org id
   - name: docker_args
     type: string
     displayName: Docker arguments
