@@ -7,6 +7,9 @@ def Map properties=[
         tfVar: "${tf_var_file}",
         backendConfigFile: "${backend_config_file}",
         awsRoleArn: "${aws_role_arn}"
+    ],
+    snyk: [
+        orgId: "${org_id}"
     ]
 ] 
 @Library("dso-shared-lib@main") _
@@ -31,6 +34,15 @@ pipeline {
                 container ("base-agent"){
                     script{
                         terraform.init(properties.deploy)
+                    }
+                }
+            }
+        }
+         stage ("snyk"){
+            steps {
+                container ("snyk"){
+                    script{               
+                        snyk.snykTest(properties)
                     }
                 }
             }
