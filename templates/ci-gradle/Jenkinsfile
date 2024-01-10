@@ -15,7 +15,8 @@ def Map properties=[
         dockerFile: "${docker_file}"
     ],
     snyk: [
-        orgId: "${org_id}"
+        orgId: "${org_id}",
+        gradleBuildPath: "${gradle_build_path}"
     ]
 ] 
 @Library("dso-shared-lib@main") _

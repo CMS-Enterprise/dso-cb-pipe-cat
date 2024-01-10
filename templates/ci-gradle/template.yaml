@@ -25,6 +25,9 @@ parameters:
   - name: test_args
     type: string
     displayName: Gradle Test arguments
+  - name: gradle_build_path
+    type: string
+    displayName: Path and name of the build.gradle file
   - name: gh_org
     type: string
     displayName: Name of your Github Org
