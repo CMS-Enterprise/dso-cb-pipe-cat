@@ -19,9 +19,6 @@ parameters:
   - name: gh_org
     type: string
     displayName: Name of your Github Org
-  - name: org_id
-    type: string
-    displayName: Snyk org id
   - name: aws_role_arn
     type: string
     default: arn:aws:iam::280350076387:role/delegatedadmin/developer/jenkins-role

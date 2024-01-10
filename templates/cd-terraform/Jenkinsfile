@@ -38,15 +38,6 @@ pipeline {
                 }
             }
         }
-         stage ("snyk"){
-            steps {
-                container ("snyk"){
-                    script{               
-                        snyk.snykTest(properties)
-                    }
-                }
-            }
-        }
          stage ("tfplan"){
             steps {
                 container ("base-agent"){
