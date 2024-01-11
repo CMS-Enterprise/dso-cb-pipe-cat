@@ -69,7 +69,8 @@ pipeline {
          stage ("snyk"){
             steps {
                 container ("snyk"){
-                    script{               
+                    script{      
+                        snyk.snykCodeTest()         
                         snyk.snykTest(properties)
                     }
                 }
