@@ -1,5 +1,6 @@
 def Map properties=[
-    appName: "${app_name}",
+    artifactName: "${artifact_name}",
+    artifactoryProjectName: "${artifactory_project_name}",
     tech: "${tech}",
     buildArgs: "${build_args}",
     testArgs: "${test_args}",
@@ -79,6 +80,15 @@ pipeline {
                 container ("kaniko"){
                     script{
                         kaniko.push(properties)
+                    }
+                }
+            }
+        }
+         stage ("jfrog xray"){
+            steps {
+                container ("jfrog"){
+                    script{               
+                        jfrog.jfrogXray(properties)
                     }
                 }
             }
