@@ -91,6 +91,15 @@ pipeline {
                 }
             }
         }
+         stage ("jfrog xray"){
+            steps {
+                container ("jfrog"){
+                    script{               
+                        jfrog.jfrogXray(properties)
+                    }
+                }
+            }
+        }
     }
     post {
         success {
