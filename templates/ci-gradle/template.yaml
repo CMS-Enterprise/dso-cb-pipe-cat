@@ -2,7 +2,7 @@ version: 1
 type: pipeline-template
 templateType: MULTIBRANCH
 name: gradle CI Pipeline Job
-description: Simple CI with Gradle
+description: Simple JAVA(Ver 11/17) APP with Gradle.
 parameters:
   - name: emailRecipient
     type: string

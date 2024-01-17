@@ -2,7 +2,7 @@ version: 1
 type: pipeline-template
 templateType: MULTIBRANCH
 name: terraform Pipeline Job
-description: Simple CD with IAC Terraform
+description: Simple CD with IAC Terraform.
 parameters:
   - name: emailRecipient
     type: string
