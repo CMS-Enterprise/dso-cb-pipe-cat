@@ -2,7 +2,7 @@ version: 1
 type: pipeline-template
 templateType: MULTIBRANCH
 name: gradle CI Pipeline Job
-description: Simple JAVA(Ver 11/17) APP with Gradle.
+description: Simple JAVA(Ver 11/17) APP with Gradle
 parameters:
   - name: emailRecipient
     type: string
@@ -16,9 +16,6 @@ parameters:
   - name: artifactory_project_name
     type: string
     displayName: Name of your project in Artifactory
-  - name: tech
-    type: string
-    displayName: Name of the Tech Stack
   - name: java_version
     type: string
     displayName: Java version

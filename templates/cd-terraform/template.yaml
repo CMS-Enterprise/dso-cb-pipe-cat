@@ -2,7 +2,7 @@ version: 1
 type: pipeline-template
 templateType: MULTIBRANCH
 name: terraform Pipeline Job
-description: Simple CD with IAC Terraform.
+description: Simple CD with IAC Terraform
 parameters:
   - name: emailRecipient
     type: string
@@ -16,9 +16,12 @@ parameters:
   - name: artifactory_project_name
     type: string
     displayName: Name of your project in Artifactory
-  - name: tech
+  - name: build_args
     type: string
-    displayName: Name of the Tech Stack
+    displayName: Terraform Bulid arguments
+  - name: test_args
+    type: string
+    displayName: Terraform Test arguments
   - name: gh_org
     type: string
     displayName: Name of your Github Org

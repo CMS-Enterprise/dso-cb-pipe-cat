@@ -1,7 +1,9 @@
 def Map properties=[
     artifactName: "${artifact_name}",
     artifactoryProjectName: "${artifactory_project_name}",
-    tech: "${tech}",
+    tech: "dotnet6",
+    buildArgs: "${build_args}",
+    testArgs: "${test_args}",
     ghOrg: "${gh_org}",
     sonarqube: [
         projectKey: "${sq_project_key}"

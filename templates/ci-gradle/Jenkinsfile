@@ -1,7 +1,7 @@
 def Map properties=[
     artifactName: "${artifact_name}",
     artifactoryProjectName: "${artifactory_project_name}",
-    tech: "${tech}",
+    tech: "gradle",
     buildArgs: "${build_args}",
     testArgs: "${test_args}",
     javaVersion: "${java_version}",
