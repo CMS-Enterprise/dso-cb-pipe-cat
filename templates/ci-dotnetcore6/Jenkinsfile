@@ -92,15 +92,21 @@ pipeline {
         }
     }
     post {
-        success {
-            script{
-                notification.success(properties)
-            }
-        }
-        failure {
-            script{
-                notification.failure(properties)
-            }
+    success {
+        script{
+            notification.success(properties)
+
+            // Slack notification for success
+            slackSend(channel: '#cms-devops-jenkins-slack-notifications', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully. See details: ${env.BUILD_URL}")
         }
     }
+    failure {
+        script{
+            notification.failure(properties)
+
+            // Slack notification for failure
+            slackSend(channel: '#cms-devops-jenkins-slack-notifications', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed. Check it out: ${env.BUILD_URL}")
+        }
+    } 
+}
 }
