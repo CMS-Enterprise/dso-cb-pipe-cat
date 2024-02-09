@@ -10,7 +10,7 @@ def Map properties=[
     ],
     build: [
         dockerargs: "${docker_args}",
-        repoName: "${repo_name}"
+        repoName: "${repo_name}",
         artifactoryPath: "${artifactory_path}",
         workDir: "${work_directory}",
         dockerFile: "${docker_file}"
