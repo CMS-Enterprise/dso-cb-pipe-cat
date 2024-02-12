@@ -34,9 +34,6 @@ parameters:
   - name: docker_args
     type: string
     displayName: Docker arguments
-  - name: repo_name
-    type: string
-    displayName: Name of Artifactory repository
   - name: artifactory_path
     type: string
     displayName: Path to Artifact in Artifactory 
