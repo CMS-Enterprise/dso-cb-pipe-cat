@@ -35,7 +35,7 @@ pipeline {
             steps {
                 container ("tfenv"){
                     script{
-                        terraform.init(properties.deploy)
+                        terraform.init(properties)
                     }
                 }
             }
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 container ("tfenv"){
                     script{
-                        terraform.plan(properties.deploy)
+                        terraform.plan(properties)
                     }
                 }
             }
@@ -53,7 +53,7 @@ pipeline {
             steps {
                 container ("tfenv"){
                     script{               
-                        terraform.apply(properties.deploy)
+                        terraform.apply(properties)
                     }
                 }
             }
