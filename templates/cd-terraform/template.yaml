@@ -10,12 +10,6 @@ parameters:
   - name: github_repo
     type: string
     displayName: GitHub HTTPS repo endpoint
-  - name: artifact_name
-    type: string
-    displayName: Name of your artifact in Artifactory
-  - name: artifactory_project_name
-    type: string
-    displayName: Name of your project in Artifactory
   - name: build_args
     type: string
     displayName: Terraform Bulid arguments
