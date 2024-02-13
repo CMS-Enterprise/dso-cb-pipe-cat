@@ -14,7 +14,7 @@ def Map properties=[
         orgId: "${org_id}"
     ]
 ] 
-@Library("dso-shared-lib@main") _
+@Library("dso-shared-lib@terraform-tfvars") _
 def podYaml = libraryResource "podTemplates/terraform-agent.yaml"
 pipeline {
     agent{
@@ -33,7 +33,7 @@ pipeline {
         }
          stage ("tfinit"){
             steps {
-                container ("base-agent"){
+                container ("tfenv"){
                     script{
                         terraform.init(properties.deploy)
                     }
@@ -42,7 +42,7 @@ pipeline {
         }
          stage ("tfplan"){
             steps {
-                container ("base-agent"){
+                container ("tfenv"){
                     script{
                         terraform.plan(properties.deploy)
                     }
@@ -51,7 +51,7 @@ pipeline {
         }
          stage ("tfapply"){
             steps {
-                container ("base-agent"){
+                container ("tfenv"){
                     script{               
                         terraform.apply(properties.deploy)
                     }
