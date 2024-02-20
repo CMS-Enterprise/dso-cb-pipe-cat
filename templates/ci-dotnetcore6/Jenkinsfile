@@ -5,6 +5,7 @@ def Map properties=[
     buildArgs: "${build_args}",
     testArgs: "${test_args}",
     ghOrg: "${gh_org}",
+    adoIAMRole: "${ado_iam_role}"
     sonarqube: [
         projectKey: "${sq_project_key}"
     ],
@@ -74,6 +75,11 @@ pipeline {
         }
          stage ("kaniko upload"){
             steps {
+                container ("awscli"){
+                    script{
+                        aws.assumeRole(properties.adoIAMRole)
+                    }
+                }
                 container ("kaniko"){
                     script{
                         kaniko.push(properties)
