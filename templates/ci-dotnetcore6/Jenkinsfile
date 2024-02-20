@@ -54,15 +54,15 @@ pipeline {
                 }
             }
         }
-         stage ("sonarqube scan"){
-            steps {
-                container ("sonarqube"){
-                    script{               
-                        sonarqube.scan(properties)
-                    }
-                }
-            }
-        }
+        //  stage ("sonarqube scan"){
+        //     steps {
+        //         container ("sonarqube"){
+        //             script{               
+        //                 sonarqube.scan(properties)
+        //             }
+        //         }
+        //     }
+        // }
          stage ("snyk"){
             steps {
                 container ("snyk"){
