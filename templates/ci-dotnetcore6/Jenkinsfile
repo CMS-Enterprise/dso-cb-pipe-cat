@@ -76,6 +76,7 @@ pipeline {
          stage ("kaniko upload"){
             steps {
                 container ("awscli"){
+                    withEnv(["myvar=$adoIAMRole"])
                     script{
                         aws.assumeRole(properties.adoIAMRole)
                     }
