@@ -77,7 +77,7 @@ pipeline {
             steps {
                 container ("awscli"){
                     script{
-                        aws.assumeRole("Y")
+                        aws.assumeRole(properties.adoIAMRole)
                     }
                 }
                 container ("kaniko"){
