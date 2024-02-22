@@ -76,12 +76,10 @@ pipeline {
          stage ("kaniko upload"){
             steps {
                 container ("awscli"){
-                    withEnv(["myvar=$ado_iam_role"]) {
                     script{
                         aws.assumeRole(properties.adoIAMRole)
                     }
-                  }
-                }
+                 }
                 container ("kaniko"){
                     script{
                         kaniko.push(properties)
