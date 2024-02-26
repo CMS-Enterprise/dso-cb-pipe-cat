@@ -12,7 +12,7 @@ parameters:
     displayName: GitHub HTTPS repo endpoint
   - name: artifact_name
     type: string
-    displayName: Name of your artifact in Artifactory
+    displayName: Full URL/ARN of your artifact in Artifactory or ECR
   - name: artifactory_project_name
     type: string
     displayName: Name of your project in Artifactory
@@ -39,7 +39,7 @@ parameters:
     displayName: Docker arguments
   - name: artifactory_path
     type: string
-    displayName: Path to Artifact in Artifactory 
+    displayName: Path to Artifact in Jfrog Artifactory or ECR
   - name: work_directory
     type: string
     displayName: Name of the working directory
