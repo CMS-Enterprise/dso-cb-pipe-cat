@@ -42,7 +42,7 @@ parameters:
     displayName: Snyk org id
   - name: artifactory_path
     type: string
-    displayName: path to artifactory in artifactory 
+    displayName: Path to Artifact in Jfrog Artifactory or ECR 
   - name: work_directory
     type: string
     displayName: Name of the working directory
