@@ -12,7 +12,7 @@ parameters:
     displayName: GitHub HTTPS repo endpoint
   - name: artifact_name
     type: string
-    displayName: Full URL/ARN of your artifact in Artifactory or ECR
+    displayName: Name of your artifact in Artifactory
   - name: artifactory_project_name
     type: string
     displayName: Name of your project in Artifactory
