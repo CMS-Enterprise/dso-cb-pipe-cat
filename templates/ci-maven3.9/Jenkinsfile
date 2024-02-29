@@ -7,7 +7,7 @@ def Map properties=[
     testArgs: "${test_args}",
     packageArgs: "${package_args}",
     ghOrg: "${gh_org}",
-    adoIAMRole: "${ado_iam_role}"
+    adoIAMRole: "${ado_iam_role}",
     sonarqube: [
         projectKey: "${sq_project_key}"
     ],
