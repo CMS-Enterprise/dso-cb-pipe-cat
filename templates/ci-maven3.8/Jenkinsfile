@@ -54,6 +54,15 @@ pipeline {
                 }
             }
         }
+        stage ("selenium"){
+            steps {
+                container ("maven"){
+                    script{        
+                        selenium.runSeleniumTests(properties)        
+                    }
+                }
+            }
+        }
          stage ("maven test"){
             steps {
                 container ("maven"){
@@ -87,15 +96,6 @@ pipeline {
                     script{        
                         snyk.snykCodeTest(properties)        
                         snyk.snykTest(properties)
-                    }
-                }
-            }
-        }
-        stage ("selenium"){
-            steps {
-                container ("maven"){
-                    script{        
-                        selenium.runSeleniumTests(properties)        
                     }
                 }
             }
