@@ -25,7 +25,7 @@ def Map properties=[
         browser: "${selenium_browser}",
         video: "${selenium_video}",
         credentialsId: "${selenium_credentials_id}",
-        mavenConfigFileId: "${selenium_maven_config_file_id}"
+        mavenConfigFile: "${selenium_maven_config_file}"
     ]
 ] 
 @Library("dso-shared-lib@main") _
