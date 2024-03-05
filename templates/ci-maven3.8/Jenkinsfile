@@ -19,6 +19,13 @@ def Map properties=[
     ],
     snyk: [
         orgId: "${org_id}"
+    ],
+    selenium: [
+        testUrl: "${selenium_test_url}",
+        browser: "${selenium_browser}",
+        video: "${selenium_video}",
+        credentialsId: "${selenium_credentials_id}"
+        mavenConfigFileId: "${selenium_maven_config_file_id}"
     ]
 ] 
 @Library("dso-shared-lib@main") _
@@ -86,7 +93,7 @@ pipeline {
         }
         stage ("selenium"){
             steps {
-                container ("selenium"){
+                container ("maven"){
                     script{        
                         selenium.runSeleniumTests(properties)        
                     }

@@ -52,6 +52,22 @@ parameters:
   - name: docker_file
     type: string
     displayName: Name of the Docker file
+  - name: selenium_test_url
+    type: string
+    displayName: Test URL for Selenium Testing
+  - name: selenium_browser
+    type: string
+    displayName: Browser for Selenium testing
+  - name: selenium_video
+    type: boolean
+    displayName: Record a video of Selenium Testing?
+  - name: selenium_creds_id
+    type: credentials
+    displayName: Cloudbees Credentials ID for Selenium access
+  - name: selenium_maven_config_file_id
+    type: string
+    displayName: Maven config file ID
+
    
 multibranch:
   branchSource:
