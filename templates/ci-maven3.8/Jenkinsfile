@@ -84,6 +84,15 @@ pipeline {
                 }
             }
         }
+        stage ("selenium"){
+            steps {
+                container ("selenium"){
+                    script{        
+                        selenium.runSeleniumTests(properties)        
+                    }
+                }
+            }
+        }
          stage ("kaniko upload"){
             steps {
                 container ("awscli"){
