@@ -24,7 +24,7 @@ def Map properties=[
         testUrl: "${selenium_test_url}",
         browser: "${selenium_browser}",
         video: "${selenium_video}",
-        credentialsId: "${selenium_credentials_id}"
+        credentialsId: "${selenium_credentials_id}",
         mavenConfigFileId: "${selenium_maven_config_file_id}"
     ]
 ] 
