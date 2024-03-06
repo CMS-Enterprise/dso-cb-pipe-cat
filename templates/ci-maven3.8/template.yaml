@@ -18,7 +18,7 @@ parameters:
     displayName: Name of your project in Artifactory
   - name: ado_iam_role
     type: string
-    displayName: IAM role to be assumed in ADO aws account
+    displayName: ARN of IAM role to be assumed in ADO owned AWS account
   - name: java_version
     type: string
     displayName: Java Version
