@@ -9,7 +9,7 @@ def Map properties=[
     ]
 ] 
 @Library("dso-shared-lib@main") _
-def podYaml = libraryResource "podTemplates/terraform-agent.yaml"
+def podYaml = libraryResource "podTemplates/helm-agent.yaml"
 pipeline {
     agent{
         kubernetes {
