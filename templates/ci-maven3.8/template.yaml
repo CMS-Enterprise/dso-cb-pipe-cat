@@ -25,12 +25,15 @@ parameters:
   - name: build_args
     type: string
     displayName: Maven Compile arguments
+    defaultValue: clean compile
   - name: test_args
     type: string
     displayName: Maven Test arguments
+    defaultValue: clean test
   - name: package_args
     type: string
     displayName: Maven Package arguments
+    defaultValue: clean package
   - name: gh_org
     type: string
     displayName: Name of your Github Org
