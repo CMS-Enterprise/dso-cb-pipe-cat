@@ -67,6 +67,10 @@ parameters:
   - name: selenium_maven_config_file
     type: string
     displayName: Maven config file path
+  - name: selenium_test_args
+    type: string
+    displayName: Selenium Test arguments
+    defaultValue: clean test
 
    
 multibranch:
