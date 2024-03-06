@@ -1,6 +1,6 @@
 version: 1
 type: pipeline-template
-templateType: MULTIBRANCH
+# templateType: PIPELINE
 name: helm Pipeline Job
 description: Simple CD with Helm
 parameters:
