@@ -1,0 +1,52 @@
+def Map properties=[
+    tech: "${tech}",
+    testArgs: "${test_args}",
+    ghOrg: "${gh_org}",
+    adoIAMRole: "${ado_iam_role}",
+    deploy: [
+        artifactoryPath: "${artifactory_path}",
+        workDir: "${work_directory}"
+    ]
+] 
+@Library("dso-shared-lib@main") _
+def podYaml = libraryResource "podTemplates/terraform-agent.yaml"
+pipeline {
+    agent{
+        kubernetes {
+            yaml podYaml
+        }
+    }
+    stages{
+        stage ("init"){
+            steps {
+                container ("jnlp"){
+                    sh "echo init"
+ //                       init()
+                }
+            }
+        }
+        stage ("helm deploy") {
+            steps {
+                container ("jnlp") {
+                    sh "echo helm deploy"
+                } 
+            }
+        }
+        stage ("post-deploy maven test") {
+            when { expression { tech.contains("maven") }}
+            steps {
+                container ("maven") {
+                    sh "echo maven test"
+                }
+            }
+        }
+        stage ("post-deploy dotnet test") {
+            when { expression { tech.contains("dotnet") }}
+            steps {
+                container ("dotnet") {
+                    sh "echo dotnet test"
+                }
+            }
+        }
+    }
+}

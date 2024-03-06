@@ -1,0 +1,63 @@
+version: 1
+type: pipeline-template
+templateType: MULTIBRANCH
+name: helm Pipeline Job
+description: Simple CD with Helm
+parameters:
+  - name: tech
+    type: string
+    displayName: Technology of your artifact to be deployed
+    defaultValue: maven
+  - name: emailRecipient
+    type: string
+    displayName: Email address to be used for sending build notifications
+  - name: github_repo
+    type: string
+    displayName: GitHub HTTPS repo endpoint
+  - name: artifactory_path
+    type: string
+    displayName: Path to Artifact in Jfrog Artifactory or ECR 
+  - name: ado_iam_role
+    type: string
+    displayName: ARN of IAM role to be assumed in ADO owned AWS account
+  - name: test_args
+    type: string
+    displayName: Maven Test arguments
+    defaultValue: clean test
+  - name: gh_org
+    type: string
+    displayName: Name of your Github Org
+  - name: work_directory
+    type: string
+    displayName: Name of the working directory
+
+  # - name: selenium_test_url
+  #   type: string
+  #   displayName: Test URL for Selenium Testing
+  # - name: selenium_browser
+  #   type: string
+  #   displayName: Browser(s) for Selenium testing
+  # - name: selenium_video
+  #   type: boolean
+  #   displayName: Record a video of Selenium Testing
+  # - name: selenium_creds_id
+  #   type: credentials
+  #   displayName: Cloudbees Credentials ID for Selenium access
+  # - name: selenium_maven_config_file
+  #   type: string
+  #   displayName: Maven config file path
+  # - name: selenium_test_args
+  #   type: string
+  #   displayName: Selenium Test arguments
+  #   defaultValue: clean test
+   
+
+# branchSource:
+#   # git:
+#     # remote: ${github_repo}
+#   github:
+#     repoOwner: ${gh_org}
+#     repository: ${github_repo}
+#     credentialsId: "git_token"
+# orphanedItemStrategy:
+#   daysToKeep: 3
