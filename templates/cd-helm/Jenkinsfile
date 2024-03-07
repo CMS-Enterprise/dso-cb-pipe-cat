@@ -2,8 +2,6 @@ def Map properties=[
     tech: "${tech}",
     testArgs: "${test_args}",
     ghOrg: "${gh_org}",
-    githubBranch: "${github_branch}",
-    githubRepo: "${github_repo}",
     adoIAMRole: "${ado_iam_role}",
     deploy: [
         artifactoryPath: "${artifactory_path}",
