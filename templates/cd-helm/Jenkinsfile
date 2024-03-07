@@ -21,7 +21,7 @@ pipeline {
     stages{
         stage('GitHub Checkout') {
             steps {
-              git credentialsId: "git_token", url: "${githubRepo}", branch: "${githubBranch}"
+              git credentialsId: "git_token", url: "${properties.githubRepo}", branch: "${properties.githubBranch}"
             }
         }
         stage ("init"){
