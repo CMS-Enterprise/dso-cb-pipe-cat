@@ -36,7 +36,7 @@ pipeline {
             when { expression { tech.contains("maven") }}
             steps {
                 container ("maven") {
-                    sh "echo maven test"
+                    maven.test(properties.testArgs)
                 }
             }
         }
@@ -44,7 +44,7 @@ pipeline {
             when { expression { tech.contains("dotnet") }}
             steps {
                 container ("dotnet") {
-                    sh "echo dotnet test"
+                    dotnet.test(properties.testArgs)
                 }
             }
         }

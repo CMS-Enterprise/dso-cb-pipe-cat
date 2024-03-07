@@ -40,7 +40,7 @@ pipeline {
             steps {
                 container ("dotnetcore6"){
                     script{
-                        dotnet.build()
+                        dotnet.build(properties.buildArgs)
                     }
                 }
             }
@@ -49,7 +49,7 @@ pipeline {
             steps {
                 container ("dotnetcore6"){
                     script{
-                        dotnet.test()
+                        dotnet.test(properties.testArgs)
                     }
                 }
             }

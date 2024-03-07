@@ -22,7 +22,7 @@ parameters:
     displayName: ARN of IAM role to be assumed in ADO owned AWS account
   - name: test_args
     type: string
-    displayName: Maven Test arguments
+    displayName: Test arguments
     defaultValue: clean test
   - name: gh_org
     type: string
