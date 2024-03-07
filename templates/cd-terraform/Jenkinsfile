@@ -1,4 +1,5 @@
 def Map properties=[
+    github_repo: "${github_repo}",
     appName: "${app_name}",
     tech: "terraform",
     buildArgs: "${build_args}",
@@ -11,27 +12,31 @@ def Map properties=[
         awsRoleArn: "${aws_role_arn}"
     ],
     snyk: [
-        orgId: "${org_id}"
+        orgId: "${org_id}" 
     ]
-] 
+]
+// TODO Snyk IAC
+
 @Library("dso-shared-lib@terraform-tfvars") _
 def podYaml = libraryResource "podTemplates/terraform-agent.yaml"
+
 pipeline {
     agent{
         kubernetes {
-            yaml podYaml
-        }
+	    yaml podYaml
     }
+    
     stages{
-        stage ("init"){
+        stage ("awsinit"){
             steps {
-                container ("jnlp"){
-                    sh "echo init"
- //                       init()
+                container("awscli"){
+                    script{
+                        aws.assumeRole(properties)
+                    }
                 }
             }
         }
-         stage ("tfinit"){
+        stage ("tfinit"){
             steps {
                 container ("tfenv"){
                     script{
@@ -40,7 +45,16 @@ pipeline {
                 }
             }
         }
-         stage ("tfplan"){
+        stage ("tftest"){
+            steps {
+                container ("tfenv"){
+                    script{
+                        terraform.test(properties)
+                    }
+                }
+            }
+        }       
+        stage ("tfplan"){
             steps {
                 container ("tfenv"){
                     script{
@@ -49,10 +63,10 @@ pipeline {
                 }
             }
         }
-         stage ("tfapply"){
+        stage ("tfapply"){
             steps {
                 container ("tfenv"){
-                    script{               
+                    script{
                         terraform.apply(properties)
                     }
                 }
@@ -71,4 +85,4 @@ pipeline {
             }
         }
     }
-}
+ }
