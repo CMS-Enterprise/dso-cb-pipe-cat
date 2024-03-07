@@ -20,7 +20,8 @@ pipeline {
         stage('GitHub Checkout') {
             steps {
                 container("jnlp") {
-                    git branch: 'maven3.8-java17-std', credentialsId: 'git_token', url: 'https://github.com/CMSgov/cmscloud-infra-jenkins-examples.git'
+                    // git branch: 'maven3.8-java17-std', credentialsId: 'git_token', url: 'https://github.com/CMSgov/cmscloud-infra-jenkins-examples.git'
+                    checkout scmGit(branches: [[name: '*/maven3.8-java17-std']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_token', url: 'https://github.com/CMSgov/cmscloud-infra-jenkins-examples.git']])
                 }
             }
         }
