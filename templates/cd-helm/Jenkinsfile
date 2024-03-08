@@ -60,5 +60,15 @@ pipeline {
                 }
             }
         }
+        stage ("post-deploy gradle test") {
+            when { expression { tech.contains("gradle") }}
+            steps {
+                container ("gradle") {
+                    script {
+                        gradle.gradleTest(properties.testArgs)
+                    }
+                }
+            }
+        }
     }
 }

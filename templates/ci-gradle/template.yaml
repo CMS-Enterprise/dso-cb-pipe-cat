@@ -25,9 +25,11 @@ parameters:
   - name: build_args
     type: string
     displayName: Gradle Build arguments
+    defaultValue: clean build
   - name: test_args
     type: string
     displayName: Gradle Test arguments
+    defaultValue: test
   - name: gradle_build_path
     type: string
     displayName: Path and name of the build.gradle file
