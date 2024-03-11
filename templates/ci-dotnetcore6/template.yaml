@@ -16,6 +16,9 @@ parameters:
   - name: artifactory_project_name
     type: string
     displayName: Name of your project in Artifactory
+  - name: artifact_package_path
+    type: string
+    displayName: Path to your artifact (optional if image-based)
   - name: ado_iam_role
     type: string
     displayName: ARN of IAM role to be assumed in ADO owned AWS account

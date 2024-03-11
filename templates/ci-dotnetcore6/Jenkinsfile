@@ -1,6 +1,7 @@
 def Map properties=[
     artifactName: "${artifact_name}",
     artifactoryProjectName: "${artifactory_project_name}",
+    artifactPackagePath: "${artifact_package_path}",
     tech: "dotnet6",
     buildArgs: "${build_args}",
     testArgs: "${test_args}",
@@ -90,7 +91,7 @@ pipeline {
                     script {
                         // jfrog.buildDockerCreateAndPublish(properties) //optional, for container builds
                         jfrog.upload(properties) // optional for non-container builds
-                        jfrog.metaDataTagging(properties)
+                        // jfrog.metaDataTagging(properties)
                     }
                 }
                 }
