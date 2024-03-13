@@ -87,6 +87,7 @@ pipeline {
                     script {
                         logger.stage()
                         kaniko.push(properties) //optional, for container builds
+                        zip.zipBuild(properties)
                     }
                 }
                 container('jfrog') {
@@ -96,7 +97,7 @@ pipeline {
                         // jfrog.metaDataTagging(properties)
                     }
                 }
-                }
+            }
         }
         //  stage ("kaniko upload"){
         //     steps {
