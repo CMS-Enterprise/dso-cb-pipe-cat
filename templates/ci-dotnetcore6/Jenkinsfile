@@ -87,6 +87,10 @@ pipeline {
                     script {
                         logger.stage()
                         kaniko.push(properties) //optional, for container builds
+                    }
+                }
+                container('base-agent') {
+                    script {
                         zip.zipBuild(properties)
                     }
                 }
