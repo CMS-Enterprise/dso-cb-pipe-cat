@@ -2,7 +2,7 @@ version: 1
 type: pipeline-template
 templateType: MULTIBRANCH
 name: maven 3.8 Pipeline Job
-description: Simple JAVA(Ver 11/17) APP with Maven
+description: Simple JAVA(Ver 11/17) APP with Maven 3.8
 parameters:
   - name: emailRecipient
     type: string
@@ -10,12 +10,21 @@ parameters:
   - name: github_repo
     type: string
     displayName: GitHub HTTPS repo endpoint
+  - name: gh_org
+    type: string
+    displayName: Name of your Github Org
   - name: artifact_name
     type: string
     displayName: Name of your artifact in Artifactory
   - name: artifactory_project_name
     type: string
     displayName: Name of your project in Artifactory
+  - name: artifact_package_path
+    type: string
+    displayName: Path to your artifact (optional if image-based)
+  - name: artifactory_path
+    type: string
+    displayName: URL to Artifact in Jfrog Artifactory or ECR 
   - name: ado_iam_role
     type: string
     displayName: ARN of IAM role to be assumed in ADO owned AWS account
@@ -34,9 +43,6 @@ parameters:
     type: string
     displayName: Maven Package arguments
     defaultValue: clean package
-  - name: gh_org
-    type: string
-    displayName: Name of your Github Org
   - name: sq_project_key
     type: string
     displayName: Sonarqube project key
@@ -46,34 +52,20 @@ parameters:
   - name: docker_args
     type: string
     displayName: Docker arguments
-  - name: artifactory_path
-    type: string
-    displayName: Path to Artifact in Jfrog Artifactory or ECR 
   - name: work_directory
     type: string
     displayName: Name of the working directory
   - name: docker_file
     type: string
     displayName: Name of the Docker file
-  - name: selenium_test_url
+  - name: zip_path
     type: string
-    displayName: Test URL for Selenium Testing
-  - name: selenium_browser
+    displayName: Path to the application files to be uploaded to Artifactory
+    defaultValue: .
+  - name: file_name
     type: string
-    displayName: Browser(s) for Selenium testing
-  - name: selenium_video
-    type: boolean
-    displayName: Record a video of Selenium Testing
-  - name: selenium_creds_id
-    type: credentials
-    displayName: Cloudbees Credentials ID for Selenium access
-  - name: selenium_maven_config_file
-    type: string
-    displayName: Maven config file path
-  - name: selenium_test_args
-    type: string
-    displayName: Selenium Test arguments
-    defaultValue: clean test
+    displayName: Name of the build zip file
+    defaultValue: example.zip
 
    
 multibranch:

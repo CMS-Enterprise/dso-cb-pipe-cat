@@ -10,6 +10,9 @@ parameters:
   - name: github_repo
     type: string
     displayName: GitHub HTTPS repo endpoint
+  - name: gh_org
+    type: string
+    displayName: Name of your Github Org
   - name: artifact_name
     type: string
     displayName: Name of your artifact in Artifactory
@@ -19,6 +22,9 @@ parameters:
   - name: artifact_package_path
     type: string
     displayName: Path to your artifact (optional if image-based)
+  - name: artifactory_path
+    type: string
+    displayName: URL to Artifact in Jfrog Artifactory or ECR
   - name: ado_iam_role
     type: string
     displayName: ARN of IAM role to be assumed in ADO owned AWS account
@@ -30,9 +36,6 @@ parameters:
     type: string
     displayName: dotnet Test arguments
     defaultValue: test
-  - name: gh_org
-    type: string
-    displayName: Name of your Github Org
   - name: sq_project_key
     type: string
     displayName: Sonarqube project key
@@ -42,9 +45,6 @@ parameters:
   - name: docker_args
     type: string
     displayName: Docker arguments
-  - name: artifactory_path
-    type: string
-    displayName: Path to Artifact in Jfrog Artifactory or ECR
   - name: work_directory
     type: string
     displayName: Name of the working directory

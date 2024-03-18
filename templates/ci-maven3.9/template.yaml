@@ -2,7 +2,7 @@ version: 1
 type: pipeline-template
 templateType: MULTIBRANCH
 name: maven 3.9 Pipeline Job
-description: Simple JAVA(Ver 11/17) APP with Maven
+description: Simple JAVA(Ver 11/17) APP with Maven 3.9
 parameters:
   - name: emailRecipient
     type: string
@@ -10,12 +10,21 @@ parameters:
   - name: github_repo
     type: string
     displayName: GitHub HTTPS repo endpoint
+  - name: gh_org
+    type: string
+    displayName: Name of your Github Org
   - name: artifact_name
     type: string
     displayName: Name of your artifact in Artifactory
   - name: artifactory_project_name
     type: string
     displayName: Name of your project in Artifactory
+  - name: artifact_package_path
+    type: string
+    displayName: Path to your artifact (optional if image-based)
+  - name: artifactory_path
+    type: string
+    displayName: URL to Artifact in Jfrog Artifactory or ECR 
   - name: ado_iam_role
     type: string
     displayName: ARN of IAM role to be assumed in ADO owned AWS account
@@ -31,9 +40,6 @@ parameters:
   - name: package_args
     type: string
     displayName: Maven Package arguments
-  - name: gh_org
-    type: string
-    displayName: Name of your Github Org
   - name: sq_project_key
     type: string
     displayName: Sonarqube project key
@@ -43,15 +49,20 @@ parameters:
   - name: org_id
     type: string
     displayName: Snyk org id
-  - name: artifactory_path
-    type: string
-    displayName: Path to Artifact in Jfrog Artifactory or ECR 
   - name: work_directory
     type: string
     displayName: Name of the working directory
   - name: docker_file
     type: string
     displayName: Name of the Docker file
+  - name: zip_path
+    type: string
+    displayName: Path to the application files to be uploaded to Artifactory
+    defaultValue: .
+  - name: file_name
+    type: string
+    displayName: Name of the build zip file
+    defaultValue: example.zip
    
 multibranch:
   branchSource:

@@ -15,18 +15,12 @@ def Map properties=[
         dockerargs: "${docker_args}",
         artifactoryPath: "${artifactory_path}",
         workDir: "${work_directory}",
-        dockerFile: "${docker_file}"
+        dockerFile: "${docker_file}",
+        zipPath: "${zip_path}",
+        fileName: "${file_name}"
     ],
     snyk: [
         orgId: "${org_id}"
-    ],
-    selenium: [
-        testUrl: "${selenium_test_url}",
-        browser: "${selenium_browser}",
-        video: "${selenium_video}",
-        credentialsId: "${selenium_creds_id}",
-        mavenConfigFile: "${selenium_maven_config_file}",
-        testArgs: "${selenium_test_args}"
     ]
 ] 
 @Library("dso-shared-lib@main") _
@@ -51,15 +45,6 @@ pipeline {
                 container ("maven"){
                     script{
                         maven.compile(properties.buildArgs)
-                    }
-                }
-            }
-        }
-        stage ("selenium"){
-            steps {
-                container ("maven"){
-                    script{        
-                        selenium.runSeleniumTests(properties)        
                     }
                 }
             }
@@ -101,20 +86,47 @@ pipeline {
                 }
             }
         }
-         stage ("kaniko upload"){
+        stage('Artifactory Publish') {
             steps {
                 container ("awscli"){
                     script{
                         aws.assumeRole(properties.adoIAMRole)
                     }
                  }
-                container ("kaniko"){
-                    script{
-                        kaniko.push(properties)
+                container('kaniko') {
+                    script {
+                        logger.stage()
+                        kaniko.push(properties) //optional, for container builds
+                    }
+                }
+                container('base-agent') {
+                    script {
+                        zip.zipBuild(properties)
+                    }
+                }
+                container('jfrog') {
+                    script {
+                        // jfrog.buildDockerCreateAndPublish(properties) //optional, for container builds
+                        jfrog.upload(properties) // optional for non-container builds
+                        // jfrog.metaDataTagging(properties)
                     }
                 }
             }
         }
+        //  stage ("kaniko upload"){
+        //     steps {
+        //         container ("awscli"){
+        //             script{
+        //                 aws.assumeRole(properties.adoIAMRole)
+        //             }
+        //          }
+        //         container ("kaniko"){
+        //             script{
+        //                 kaniko.push(properties)
+        //             }
+        //         }
+        //     }
+        // }
          stage ("jfrog xray"){
             steps {
                 container ("jfrog"){
