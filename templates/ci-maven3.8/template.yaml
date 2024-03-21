@@ -27,7 +27,7 @@ parameters:
     displayName: URL to Artifact in Jfrog Artifactory or ECR (required if image upload) 
   - name: ado_iam_role
     type: string
-    displayName: ARN of IAM role to be assumed in ADO owned AWS account (required if using ECR)
+    displayName: IAM Role ARN to be assumed in ADO owned AWS account (required if using ECR)
   - name: java_version
     type: string
     displayName: Java Version

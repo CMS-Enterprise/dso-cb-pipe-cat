@@ -22,7 +22,7 @@ parameters:
     displayName: Path to Artifact in Jfrog Artifactory or ECR 
   - name: ado_iam_role
     type: string
-    displayName: ARN of IAM role to be assumed in ADO owned AWS account (required if using ECR)
+    displayName: IAM Role ARN to be assumed in ADO owned AWS account (required if using ECR)
   - name: test_args
     type: string
     displayName: Test arguments
