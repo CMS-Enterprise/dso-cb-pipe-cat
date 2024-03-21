@@ -8,12 +8,12 @@ parameters:
     type: string
     displayName: Technology of your artifact to be deployed
     defaultValue: maven
-  - name: emailRecipient
+  - name: email_recipient
     type: string
     displayName: Email address to be used for sending build notifications
   - name: github_repo
     type: string
-    displayName: GitHub HTTPS repo endpoint
+    displayName: GitHub Repo Name
   - name: github_branch
     type: string
     displayName: GitHub project branch name
@@ -22,7 +22,7 @@ parameters:
     displayName: Path to Artifact in Jfrog Artifactory or ECR 
   - name: ado_iam_role
     type: string
-    displayName: ARN of IAM role to be assumed in ADO owned AWS account
+    displayName: ARN of IAM role to be assumed in ADO owned AWS account (required if using ECR)
   - name: test_args
     type: string
     displayName: Test arguments
@@ -32,7 +32,8 @@ parameters:
     displayName: Name of your Github Org
   - name: work_directory
     type: string
-    displayName: Name of the working directory
+    displayName: Relative location of the application working directory
+    defaultValue: .
 
   # - name: selenium_test_url
   #   type: string

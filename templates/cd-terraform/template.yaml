@@ -4,12 +4,12 @@ templateType: MULTIBRANCH
 name: terraform Pipeline Job
 description: Simple CD with IAC Terraform
 parameters:
-  - name: emailRecipient
+  - name: email_recipient
     type: string
     displayName: Email address to be used for sending build notifications
   - name: github_repo
     type: string
-    displayName: GitHub HTTPS repo endpoint
+    displayName: GitHub Repo Name
   - name: artifact_name
     type: string
     displayName: Name of your artifact in Artifactory
@@ -31,7 +31,8 @@ parameters:
     displayName: Provide AWS service account role arn
   - name: work_directory
     type: string
-    displayName: Name of the working directory
+    displayName: Relative location of the application working directory
+    defaultValue: .
   - name: tf_var_file
     type: string
     displayName: Path and name of the tf var files

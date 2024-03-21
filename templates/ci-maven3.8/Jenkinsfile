@@ -1,4 +1,5 @@
 def Map properties=[
+    emailRecipient: "${email_recipient}",
     artifactName: "${artifact_name}",
     artifactoryProjectName: "${artifactory_project_name}",
     tech: "maven3.8",

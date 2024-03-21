@@ -4,12 +4,12 @@ templateType: MULTIBRANCH
 name: dotNet Core 6 Pipeline Job
 description: Simple dotnetcore 6 App
 parameters:
-  - name: emailRecipient
+  - name: email_recipient
     type: string
     displayName: Email address to be used for sending build notifications
   - name: github_repo
     type: string
-    displayName: GitHub HTTPS repo endpoint
+    displayName: GitHub Repo Name
   - name: gh_org
     type: string
     displayName: Name of your Github Org
@@ -21,13 +21,13 @@ parameters:
     displayName: Name of your project in Artifactory
   - name: artifact_package_path
     type: string
-    displayName: Path to your artifact (optional if image-based)
+    displayName: Path to your artifact (required if zip/binary upload)
   - name: artifactory_path
     type: string
-    displayName: URL to Artifact in Jfrog Artifactory or ECR
+    displayName: URL to Artifact in Jfrog Artifactory or ECR (required if image upload)
   - name: ado_iam_role
     type: string
-    displayName: ARN of IAM role to be assumed in ADO owned AWS account
+    displayName: ARN of IAM role to be assumed in ADO owned AWS account (required if using ECR)
   - name: build_args
     type: string
     displayName: dotnet Build arguments
@@ -38,26 +38,27 @@ parameters:
     defaultValue: test
   - name: sq_project_key
     type: string
-    displayName: Sonarqube project key
+    displayName: SonarQube project key
   - name: org_id
     type: string
-    displayName: Snyk org id
+    displayName: Snyk Org ID
   - name: docker_args
     type: string
     displayName: Docker arguments
   - name: work_directory
     type: string
-    displayName: Name of the working directory
+    displayName: Relative location of the application working directory
+    defaultValue: .
   - name: docker_file
     type: string
-    displayName: Name of the Docker file
+    displayName: Name of the Dockerfile
   - name: zip_path
     type: string
-    displayName: Path to the application files to be uploaded to Artifactory
+    displayName: Relative location of the application files to be uploaded to Artifactory (required if zip upload)
     defaultValue: .
   - name: file_name
     type: string
-    displayName: Name of the build zip file
+    displayName: Name of the build zip file (required if zip upload)
     defaultValue: example.zip
    
 multibranch:
