@@ -24,7 +24,7 @@ def Map properties=[
         gradleBuildPath: "${gradle_build_path}"
     ]
 ] 
-@Library("dso-shared-lib@main") _
+@Library("dso-shared-lib@develop") _
 def podYaml = libraryResource "podTemplates/gradle-java${properties.javaVersion}-agent.yaml"
 pipeline {
     agent{
