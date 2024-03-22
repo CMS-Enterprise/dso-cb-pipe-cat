@@ -1,7 +1,7 @@
 version: 1
 type: pipeline-template
 # templateType: PIPELINE
-name: helm Pipeline Job
+name: Dev-helm Pipeline Job
 description: Simple CD with Helm
 parameters:
   - name: tech

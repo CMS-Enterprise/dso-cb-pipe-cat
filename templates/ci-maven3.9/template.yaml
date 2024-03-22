@@ -1,7 +1,7 @@
 version: 1
 type: pipeline-template
 templateType: MULTIBRANCH
-name: maven 3.9 Pipeline Job
+name: Dev-maven 3.9 Pipeline Job
 description: Simple JAVA(Ver 11/17) APP with Maven 3.9
 parameters:
   - name: email_recipient
