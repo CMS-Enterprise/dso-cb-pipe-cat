@@ -1,7 +1,7 @@
 version: 1
 type: pipeline-template
 templateType: MULTIBRANCH
-name: Dev-dotNet Core 6 Pipeline Job
+name: dotNet Core 6 Pipeline Job
 description: Simple dotnetcore 6 App
 parameters:
   - name: email_recipient
