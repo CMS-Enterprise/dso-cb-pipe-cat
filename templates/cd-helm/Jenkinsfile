@@ -8,7 +8,7 @@ def Map properties=[
         workDir: "${work_directory}"
     ]
 ] 
-@Library("dso-shared-lib@main") _
+@Library("dso-shared-lib@develop") _
 def podYaml = libraryResource "podTemplates/helm-agent.yaml"
 pipeline {
     agent{

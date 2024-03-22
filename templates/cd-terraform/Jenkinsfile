@@ -14,7 +14,7 @@ def Map properties=[
         orgId: "${org_id}"
     ]
 ] 
-@Library("dso-shared-lib@main") _
+@Library("dso-shared-lib@develop") _
 def podYaml = libraryResource "podTemplates/terraform-agent.yaml"
 pipeline {
     agent{

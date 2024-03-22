@@ -24,7 +24,7 @@ def Map properties=[
         orgId: "${org_id}"
     ]
 ] 
-@Library("dso-shared-lib@main") _
+@Library("dso-shared-lib@develop") _
 def podYaml = libraryResource "podTemplates/maven3.8-java${properties.javaVersion}-agent.yaml"
 pipeline {
     agent{
