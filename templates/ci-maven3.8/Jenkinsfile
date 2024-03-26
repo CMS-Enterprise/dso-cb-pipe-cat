@@ -36,8 +36,9 @@ pipeline {
         stage ("init"){
             steps {
                 container ("jnlp"){
-                    sh "echo init"
- //                       init()
+                    script{
+                        init.paramValidator(properties)
+                    }
                 }
             }
         }

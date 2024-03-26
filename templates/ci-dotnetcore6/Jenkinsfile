@@ -23,6 +23,7 @@ def Map properties=[
         orgId: "${org_id}"
     ]
 ] 
+// TODO: How to switch between main & develop based on env
 @Library("dso-shared-lib@develop") _
 def podYaml = libraryResource "podTemplates/dotnetcore6-agent.yaml"
 pipeline {
@@ -59,15 +60,15 @@ pipeline {
                 }
             }
         }
-        //  stage ("sonarqube scan"){
-        //     steps {
-        //         container ("sonarqube"){
-        //             script{               
-        //                 sonarqube.scan(properties)
-        //             }
-        //         }
-        //     }
-        // }
+         stage ("sonarqube scan"){
+            steps {
+                container ("sonarqube"){
+                    script{               
+                        sonarqube.scan(properties)
+                    }
+                }
+            }
+        }
          stage ("snyk"){
             steps {
                 container ("snyk"){
