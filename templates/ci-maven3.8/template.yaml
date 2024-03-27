@@ -22,7 +22,7 @@ parameters:
   - name: artifact_host
     type: string
     displayName: Jfrog Artifactory or ECR?
-    defaultValue: artifactory.cloud.cms.gov OR <AWS_ACCOUNT>.dkr.ecr.<AWS_REGION>.amazonaws.com 
+    defaultValue: artifactory.cloud.cms.gov OR <AWS_ACCOUNT>.dkr.ecr.<AWS_REGION>.amazonaws.com
   - name: ado_iam_role
     type: string
     displayName: IAM Role ARN to be assumed in ADO owned AWS account (required if using ECR)

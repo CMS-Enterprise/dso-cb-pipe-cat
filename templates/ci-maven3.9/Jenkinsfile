@@ -2,6 +2,7 @@ def Map properties=[
     emailRecipient: "${email_recipient}",
     artifactName: "",
     artifactoryProjectName: "${artifactory_project_name}",
+    artifactPackagePath: "${artifact_package_path}",
     tech: "maven3.9",
     javaVersion: "${java_version}",
     buildArgs: "${build_args}",
