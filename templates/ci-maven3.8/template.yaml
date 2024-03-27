@@ -22,7 +22,7 @@ parameters:
   - name: artifact_package_path
     type: string
     displayName: Path to your artifact (required if zip/binary upload)
-  - name: artifactory_path
+  - name: artifact_host
     type: string
     displayName: URL to Artifact in Jfrog Artifactory or ECR (required if image upload) 
   - name: ado_iam_role

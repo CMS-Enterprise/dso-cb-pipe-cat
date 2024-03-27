@@ -1,6 +1,6 @@
 def Map properties=[
     emailRecipient: "${email_recipient}",
-    artifactName: "${artifact_name}",
+    artifactName: "",
     artifactoryProjectName: "${artifactory_project_name}",
     artifactPackagePath: "${artifact_package_path}",
     tech: "dotnet6",
@@ -13,7 +13,7 @@ def Map properties=[
     ],
     build: [
         dockerargs: "${docker_args}",
-        artifactoryPath: "${artifactory_path}",
+        artifactHost: "${artifact_host}",
         workDir: "${work_directory}",
         dockerFile: "${docker_file}",
         zipPath: "${zip_path}",
@@ -38,6 +38,7 @@ pipeline {
                 container ("jnlp"){
                     script{
                         init.paramValidator(properties)
+                        init.getArtifactName(properties)
                     }
                 }
             }

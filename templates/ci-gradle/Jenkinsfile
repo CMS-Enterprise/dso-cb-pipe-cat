@@ -13,7 +13,7 @@ def Map properties=[
     ],
     build: [
         dockerargs: "${docker_args}",
-        artifactoryPath: "${artifactory_path}",
+        artifactHost: "${artifact_host}",
         workDir: "${work_directory}",
         dockerFile: "${docker_file}",
         zipPath: "${zip_path}",

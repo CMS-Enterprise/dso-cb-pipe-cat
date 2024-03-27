@@ -4,7 +4,7 @@ def Map properties=[
     ghOrg: "${gh_org}",
     adoIAMRole: "${ado_iam_role}",
     deploy: [
-        artifactoryPath: "${artifactory_path}",
+        artifactHost: "${artifact_host}",
         workDir: "${work_directory}"
     ]
 ] 
