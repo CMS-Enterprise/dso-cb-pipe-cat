@@ -1,6 +1,6 @@
 def Map properties=[
     emailRecipient: "${email_recipient}",
-    artifactName: "${artifact_name}",
+    artifactName: "",
     artifactoryProjectName: "${artifactory_project_name}",
     tech: "maven3.8",
     javaVersion: "${java_version}",
@@ -38,6 +38,7 @@ pipeline {
                 container ("jnlp"){
                     script{
                         init.paramValidator(properties)
+                        init.getArtifactName(properties)
                     }
                 }
             }
@@ -115,20 +116,6 @@ pipeline {
                 }
             }
         }
-        //  stage ("kaniko upload"){
-        //     steps {
-        //         container ("awscli"){
-        //             script{
-        //                 aws.assumeRole(properties.adoIAMRole)
-        //             }
-        //          }
-        //         container ("kaniko"){
-        //             script{
-        //                 kaniko.push(properties)
-        //             }
-        //         }
-        //     }
-        // }
          stage ("jfrog xray"){
             steps {
                 container ("jfrog"){

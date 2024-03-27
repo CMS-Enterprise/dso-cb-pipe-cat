@@ -107,20 +107,6 @@ pipeline {
                 }
             }
         }
-        //  stage ("kaniko upload"){
-        //     steps {
-        //         container ("awscli"){
-        //             script{
-        //                 aws.assumeRole(properties.adoIAMRole)
-        //             }
-        //          }
-        //         container ("kaniko"){
-        //             script{
-        //                 kaniko.push(properties)
-        //             }
-        //         }
-        //     }
-        // }
          stage ("jfrog xray"){
             steps {
                 container ("jfrog"){

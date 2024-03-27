@@ -15,7 +15,7 @@ parameters:
     displayName: Name of your Github Org
   - name: artifactory_project_name
     type: string
-    displayName: Name of your project in Artifactory
+    displayName: Name of your project (required if using Artifactory)
   - name: artifact_package_path
     type: string
     displayName: Path to your artifact
