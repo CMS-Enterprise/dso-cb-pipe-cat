@@ -26,8 +26,8 @@ def Map properties=[
 def sharedLibraryBranch
 if (env.devopsDebugOverridesSharedLibraryBranch){ sharedLibraryBranch = env.devopsDebugOverridesSharedLibraryBranch }
 else { sharedLibraryBranch = "main" }
+
 library "dso-shared-lib@${sharedLibraryBranch}"
-// @Library("dso-shared-lib@develop") _
 def podYaml = libraryResource "podTemplates/dotnetcore6-agent.yaml"
 pipeline {
     agent{

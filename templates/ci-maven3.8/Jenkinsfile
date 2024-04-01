@@ -25,7 +25,11 @@ def Map properties=[
         orgId: "${org_id}"
     ]
 ] 
-@Library("dso-shared-lib@develop") _
+def sharedLibraryBranch
+if (env.devopsDebugOverridesSharedLibraryBranch){ sharedLibraryBranch = env.devopsDebugOverridesSharedLibraryBranch }
+else { sharedLibraryBranch = "main" }
+
+library "dso-shared-lib@${sharedLibraryBranch}"
 def podYaml = libraryResource "podTemplates/maven3.8-java${properties.javaVersion}-agent.yaml"
 pipeline {
     agent{
