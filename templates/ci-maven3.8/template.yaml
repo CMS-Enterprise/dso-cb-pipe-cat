@@ -13,18 +13,16 @@ parameters:
   - name: gh_org
     type: string
     displayName: Name of your Github Org
-  - name: artifact_name
-    type: string
-    displayName: Name of your artifact in Artifactory
   - name: artifactory_project_name
     type: string
-    displayName: Name of your project in Artifactory
+    displayName: Name of your project (required if using Artifactory)
   - name: artifact_package_path
     type: string
-    displayName: Path to your artifact (required if zip/binary upload)
-  - name: artifactory_path
+    displayName: Path to your artifact
+  - name: artifact_host
     type: string
-    displayName: URL to Artifact in Jfrog Artifactory or ECR (required if image upload) 
+    displayName: Jfrog Artifactory or ECR?
+    defaultValue: artifactory.cloud.cms.gov OR <AWS_ACCOUNT>.dkr.ecr.<AWS_REGION>.amazonaws.com
   - name: ado_iam_role
     type: string
     displayName: IAM Role ARN to be assumed in ADO owned AWS account (required if using ECR)

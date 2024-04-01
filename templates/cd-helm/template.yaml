@@ -17,7 +17,7 @@ parameters:
   - name: github_branch
     type: string
     displayName: GitHub project branch name
-  - name: artifactory_path
+  - name: artifact_host
     type: string
     displayName: Path to Artifact in Jfrog Artifactory or ECR 
   - name: ado_iam_role

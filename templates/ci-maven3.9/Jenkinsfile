@@ -1,7 +1,8 @@
 def Map properties=[
     emailRecipient: "${email_recipient}",
-    artifactName: "${artifact_name}",
+    artifactName: "",
     artifactoryProjectName: "${artifactory_project_name}",
+    artifactPackagePath: "${artifact_package_path}",
     tech: "maven3.9",
     javaVersion: "${java_version}",
     buildArgs: "${build_args}",
@@ -14,7 +15,7 @@ def Map properties=[
     ],
     build: [
         dockerargs: "${docker_args}",
-        artifactoryPath: "${artifactory_path}",
+        artifactHost: "${artifact_host}",
         workDir: "${work_directory}",
         dockerFile: "${docker_file}",
         zipPath: "${zip_path}",
@@ -24,7 +25,11 @@ def Map properties=[
         orgId: "${org_id}"
     ]
 ] 
-@Library("dso-shared-lib@main") _
+def sharedLibraryBranch
+if (env.devopsDebugOverridesSharedLibraryBranch){ sharedLibraryBranch = env.devopsDebugOverridesSharedLibraryBranch }
+else { sharedLibraryBranch = "main" }
+
+library "dso-shared-lib@${sharedLibraryBranch}"
 def podYaml = libraryResource "podTemplates/${properties.tech}-java${properties.javaVersion}-agent.yaml"
 pipeline {
     agent{
@@ -36,8 +41,10 @@ pipeline {
         stage ("init"){
             steps {
                 container ("jnlp"){
-                    sh "echo init"
- //                       init()
+                    script{
+                        init.paramValidator(properties)
+                        init.getArtifactName(properties)
+                    }
                 }
             }
         }
@@ -69,6 +76,9 @@ pipeline {
             }
         }
          stage ("sonarqube scan"){
+            when {
+                expression { return properties.sonarqube.projectKey }
+            }
             steps {
                 container ("sonarqube"){
                     script{               
@@ -78,6 +88,9 @@ pipeline {
             }
         }
          stage ("snyk"){
+            when {
+                expression { return properties.snyk.orgId }
+            }
             steps {
                 container ("snyk"){
                     script{   
@@ -114,20 +127,6 @@ pipeline {
                 }
             }
         }
-        //  stage ("kaniko upload"){
-        //     steps {
-        //         container ("awscli"){
-        //             script{
-        //                 aws.assumeRole(properties.adoIAMRole)
-        //             }
-        //          }
-        //         container ("kaniko"){
-        //             script{
-        //                 kaniko.push(properties)
-        //             }
-        //         }
-        //     }
-        // }
          stage ("jfrog xray"){
             steps {
                 container ("jfrog"){
