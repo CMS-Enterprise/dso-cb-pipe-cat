@@ -23,8 +23,11 @@ def Map properties=[
         orgId: "${org_id}"
     ]
 ] 
-// TODO: How to switch between main & develop based on env
-@Library("dso-shared-lib@develop") _
+def sharedLibraryBranch
+if (env.devopsDebugOverridesSharedLibraryBranch){ sharedLibraryBranch = env.devopsDebugOverridesSharedLibraryBranch }
+else { sharedLibraryBranch = "main" }
+library "dso-shared-lib@${sharedLibraryBranch}"
+// @Library("dso-shared-lib@develop") _
 def podYaml = libraryResource "podTemplates/dotnetcore6-agent.yaml"
 pipeline {
     agent{
