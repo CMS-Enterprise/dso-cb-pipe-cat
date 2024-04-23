@@ -1,0 +1,157 @@
+def Map properties=[
+    emailRecipient: "${email_recipient}",
+    artifactName: "",
+    artifactoryProjectName: "${artifactory_project_name}",
+    artifactPackagePath: "${artifact_package_path}",
+    tech: "node",
+    buildArgs: "${build_args}",
+    testArgs: "${test_args}",
+    installArgs: "${install_args}"
+    ghOrg: "${gh_org}",
+    adoIAMRole: "${ado_iam_role}",
+    sonarqube: [
+        projectKey: "${sq_project_key}"
+    ],
+    build: [
+        dockerargs: "${docker_args}",
+        artifactHost: "${artifact_host}",
+        workDir: "${work_directory}",
+        dockerFile: "${docker_file}",
+        zipPath: "${zip_path}",
+        fileName: "${file_name}"
+    ],
+    snyk: [
+        orgId: "${org_id}"
+    ]
+] 
+def sharedLibraryBranch
+if (env.devopsDebugOverridesSharedLibraryBranch){ sharedLibraryBranch = env.devopsDebugOverridesSharedLibraryBranch }
+else { sharedLibraryBranch = "main" }
+
+library "dso-shared-lib@${sharedLibraryBranch}"
+def podYaml = libraryResource "podTemplates/node18-agent.yaml"
+pipeline {
+    agent{
+        kubernetes {
+            yaml podYaml
+        }
+    }
+    stages{
+        stage ("init"){
+            steps {
+                container ("jnlp"){
+                    script{
+                        init.paramValidator(properties)
+                        init.getArtifactName(properties)
+                    }
+                }
+            }
+        }
+         stage ("npm test"){
+            steps {
+                container ("node"){
+                    script{
+                        npm.test(properties.testArgs)
+                    }
+                }
+            }
+        }
+         stage ("npm install"){
+            steps {
+                container ("node"){
+                    script{
+                        npm.install(properties.installArgs)
+                    }
+                }
+            }
+        }
+         stage ("npm build"){
+            steps {
+                container ("node"){
+                    script{
+                        npm.build(properties.buildArgs)
+                    }
+                }
+            }
+        }
+         stage ("sonarqube scan"){
+            when {
+                expression { return properties.sonarqube.projectKey }
+            }
+            steps {
+                container ("sonarqube"){
+                    script{               
+                        sonarqube.scan(properties)
+                    }
+                }
+            }
+        }
+         stage ("snyk"){
+            when {
+                expression { return properties.snyk.orgId }
+            }
+            steps {
+                container ("snyk"){
+                    script{         
+                        snyk.snykCodeTest(properties)       
+                        snyk.snykTest(properties)
+                    }
+                }
+            }
+        }
+        stage('Artifactory Publish') {
+            steps {
+                container ("awscli"){
+                    script{
+                        aws.assumeRole(properties.adoIAMRole)
+                    }
+                 }
+                container('kaniko') {
+                    script {
+                        logger.stage()
+                        kaniko.push(properties) //optional, for container builds
+                    }
+                }
+                container('base-agent') {
+                    script {
+                        zip.zipBuild(properties)
+                    }
+                }
+                container('jfrog') {
+                    script {
+                        // jfrog.buildDockerCreateAndPublish(properties) //optional, for container builds
+                        jfrog.upload(properties) // optional for non-container builds
+                        // jfrog.metaDataTagging(properties)
+                    }
+                }
+            }
+        }
+         stage ("jfrog xray"){
+            steps {
+                container ("jfrog"){
+                    script{               
+                        jfrog.jfrogXray(properties)
+                    }
+                }
+            }
+        }
+    }
+    post {
+    success {
+        script{
+            notification.success(properties)
+
+            // notify Slack on success
+            slackSend(channel: '#cms-devops-jenkins-slack-notifications', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully. See details: ${env.BUILD_URL}")
+        }
+    }
+    failure {
+        script{
+            notification.failure(properties)
+
+            // notify Slack on failure
+            slackSend(channel: '#cms-devops-jenkins-slack-notifications', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed. Check it out: ${env.BUILD_URL}")
+        }
+    } 
+}
+}
