@@ -30,10 +30,10 @@ parameters:
     type: string
     displayName: npm test arguments
     defaultValue: run test
-  - name: install_args
+  - name: ci_args
     type: string
-    displayName: npm install arguments
-    defaultValue: install
+    displayName: npm ci arguments
+    defaultValue: ci
   - name: build_args
     type: string
     displayName: npm build arguments
