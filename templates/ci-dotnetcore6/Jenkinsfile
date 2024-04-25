@@ -27,7 +27,8 @@ def sharedLibraryBranch
 if (env.devopsDebugOverridesSharedLibraryBranch){ sharedLibraryBranch = env.devopsDebugOverridesSharedLibraryBranch }
 else { sharedLibraryBranch = "main" }
 
-library "dso-shared-lib@${sharedLibraryBranch}"
+// TODO: REVERT
+library "dso-shared-lib@swaters23/update-to-kaniko-push"
 def podYaml = libraryResource "podTemplates/dotnetcore6-agent.yaml"
 pipeline {
     agent{
