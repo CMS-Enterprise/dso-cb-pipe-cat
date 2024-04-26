@@ -71,6 +71,6 @@ multibranch:
       repoOwner: ${gh_org}
       repository: ${github_repo}
       credentialsId: "git_token"
-  scanRepositoryInterval: 3 minutes
+  scanRepositoryInterval: 15 minutes
   orphanedItemStrategy:
     daysToKeep: 3
