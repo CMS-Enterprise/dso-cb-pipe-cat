@@ -1,5 +1,4 @@
 def Map properties=[
-    appName: "${app_name}",
     tech: "terraform",
     buildArgs: "${build_args}",
     testArgs: "${test_args}",
