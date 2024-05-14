@@ -10,7 +10,7 @@ parameters:
   - name: slack_notification
     type: string
     displayName: If you'd like to receive slack notification, enter the channel name
-    defaultValue: \#example-channel
+    defaultValue: #example-channel
   - name: github_repo
     type: string
     displayName: GitHub Repo Name
