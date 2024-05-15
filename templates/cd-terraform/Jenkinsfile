@@ -29,7 +29,7 @@ pipeline {
             steps {
                 container("awscli"){
                     script{
-                        aws.assumeRole(properties)
+                        aws.assumeRole(properties.deploy.awsRoleArn)
                     }
                 }
             }
