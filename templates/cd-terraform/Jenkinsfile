@@ -24,6 +24,7 @@ pipeline {
     agent{
         kubernetes {
 	    yaml podYaml
+         }
     }
     
     stages{
@@ -86,4 +87,3 @@ pipeline {
         }
     }
  }
-}
