@@ -10,7 +10,7 @@ parameters:
   - name: slack_notification
     type: string
     displayName: If you'd like to receive slack notification, enter the channel name
-    defaultValue: #example-channel
+    defaultValue: '#example-channel'
   - name: github_repo
     type: string
     displayName: GitHub Repo Name
@@ -30,6 +30,10 @@ parameters:
   - name: ado_iam_role
     type: string
     displayName: IAM Role ARN to be assumed in ADO owned AWS account (required if using ECR)
+  - name: cache
+    type: string
+    displayName: Do you want to enable layer caching for your package upload? (true/false)
+    defaultValue: 'false'
   - name: build_args
     type: string
     displayName: dotnet Build arguments
