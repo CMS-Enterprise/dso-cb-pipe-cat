@@ -10,15 +10,18 @@ parameters:
   - name: github_repo
     type: string
     displayName: GitHub HTTPS repo endpoint
+  - name: gh_org
+    type: string
+    displayName: Name of your Github Org
   - name: build_args
     type: string
     displayName: Terraform Bulid arguments
   - name: test_args
     type: string
     displayName: Terraform Test arguments
-  - name: gh_org
+  - name: app_name
     type: string
-    displayName: Name of your Github Org
+    displayName: Name of your APP
   - name: aws_role_arn
     type: string
     default: arn:aws:iam::280350076387:role/delegatedadmin/developer/jenkins-role
