@@ -10,9 +10,6 @@ def Map properties=[
         tfVar: "${tf_var_file}",
         backendConfigFile: "${backend_config_file}",
         awsRoleArn: "${aws_role_arn}"
-    ],
-    snyk: [
-        orgId: "${org_id}" 
     ]
 ]
 // TODO Snyk IAC
