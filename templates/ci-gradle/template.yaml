@@ -50,13 +50,27 @@ parameters:
     type: string
     displayName: Name of the Docker file
    
+# DIDN'T WORK
+# multibranch:
+#   branchSource:
+#     github:
+#       repoOwner: ${gh_org}
+#       repository: ${github_repo}
+#       credentialsId: "git_token"
+#       includes:
+#         - gradle-java11-std
+#   orphanedItemStrategy:
+#     daysToKeep: 3
+
 multibranch:
   branchSource:
-    github:
-      repoOwner: ${gh_org}
-      repository: ${github_repo}
-      credentialsId: "git_token"
-      includes:
-        - gradle-java11-std
+    git:
+      remote: 'https://github.com/${gh_org}/${github_repo}.git'
+      credentialsId: 'git-token'
+      traits:
+        - gitBranchDiscovery
+        - $class: DiscoverOtherRefsTrait
+          ref: 'gradle-java11-std'
+        - cleanBeforeCheckout
   orphanedItemStrategy:
     daysToKeep: 3
