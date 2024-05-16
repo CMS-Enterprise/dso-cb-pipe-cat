@@ -55,7 +55,7 @@ multibranch:
     #   includes: 
     #    - dotnetcore6.6-std
     git:
-      remote: 'https://github.com/${gh_org}/${github_repo}'
+      remote: 'https://github.com/${gh_org}/${github_repo}.git'
       credentialsId: 'git_token'
       traits:
         - gitBranchDiscovery
