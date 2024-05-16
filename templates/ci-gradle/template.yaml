@@ -62,15 +62,44 @@ parameters:
 #   orphanedItemStrategy:
 #     daysToKeep: 3
 
-multibranch:
+# multibranch:
+#   branchSource:
+#     git:
+#       remote: 'https://github.com/${gh_org}/${github_repo}.git'
+#       credentialsId: "git_token"
+#       traits:
+#         - gitBranchDiscovery
+#         - $class: DiscoverOtherRefsTrait
+#           ref: 'heads/gradle-java11-std'
+#         - cleanBeforeCheckout
+#     strategy:
+#       $class: NamedExceptionsBranchPropertyStrategy
+#       namedExceptions:
+#         - name: "gradle-java11-std"
+#       defaultProperties:
+#         - $class: NoTriggerBranchProperty
+#     buildStrategies:
+#       - $class: SkipInitialBuildOnFirstBranchIndexing
+#   orphanedItemStrategy:
+#     daysToKeep: 3
+
+  multibranch:
   branchSource:
     git:
       remote: 'https://github.com/${gh_org}/${github_repo}.git'
       credentialsId: "git_token"
       traits:
-        - gitBranchDiscovery
-        - $class: DiscoverOtherRefsTrait
-          ref: 'heads/gradle-java11-std'
-        - cleanBeforeCheckout
+        - $class: "jenkins.plugins.git.traits.CleanBeforeCheckoutTrait"  # Clean before checkout
+        - $class: "jenkins.scm.impl.trait.WildcardSCMSourceFilterTrait"  # Include only the specified branch
+          includes: 'gradle-java11-std'
+          excludes: ''  # No branches to exclude since we only want to include one
+    strategy:
+      $class: NamedExceptionsBranchPropertyStrategy
+      namedExceptions:
+        - name: "gradle-java11-std"
+      defaultProperties:
+        - $class: NoTriggerBranchProperty
+    buildStrategies:
+      - $class: SkipInitialBuildOnFirstBranchIndexing
   orphanedItemStrategy:
     daysToKeep: 3
