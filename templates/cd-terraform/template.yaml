@@ -7,21 +7,13 @@ parameters:
   - name: email_recipient
     type: string
     displayName: Email address to be used for sending build notifications
+  - name: slack_notification
+    type: string
+    displayName: If you'd like to receive slack notification, enter the channel name
+    defaultValue: #example-channel
   - name: github_repo
     type: string
     displayName: GitHub Repo Name
-  - name: artifact_name
-    type: string
-    displayName: Name of your artifact in Artifactory
-  - name: artifactory_project_name
-    type: string
-    displayName: Name of your project in Artifactory
-  - name: build_args
-    type: string
-    displayName: Terraform Bulid arguments
-  - name: test_args
-    type: string
-    displayName: Terraform Test arguments
   - name: gh_org
     type: string
     displayName: Name of your Github Org

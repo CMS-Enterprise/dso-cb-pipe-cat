@@ -1,5 +1,6 @@
 def Map properties=[
     tech: "${tech}",
+    slackNotification: "${slack_notification}",
     testArgs: "${test_args}",
     ghOrg: "${gh_org}",
     adoIAMRole: "${ado_iam_role}",

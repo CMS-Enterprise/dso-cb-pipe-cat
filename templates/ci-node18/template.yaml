@@ -7,6 +7,10 @@ parameters:
   - name: email_recipient
     type: string
     displayName: Email address to be used for sending build notifications
+  - name: slack_notification
+    type: string
+    displayName: If you'd like to receive slack notification, enter the channel name
+    defaultValue: #example-channel
   - name: github_repo
     type: string
     displayName: GitHub Repo Name
@@ -71,5 +75,6 @@ multibranch:
       repoOwner: ${gh_org}
       repository: ${github_repo}
       credentialsId: "git_token"
+  scanRepositoryInterval: 15 minutes
   orphanedItemStrategy:
     daysToKeep: 3

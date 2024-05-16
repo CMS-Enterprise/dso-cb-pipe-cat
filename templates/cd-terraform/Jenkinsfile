@@ -1,20 +1,15 @@
 def Map properties=[
-    appName: "${app_name}",
     tech: "terraform",
-    buildArgs: "${build_args}",
-    testArgs: "${test_args}",
+    slackNotification: "${slack_notification}",
     ghOrg: "${gh_org}",
     deploy: [
         workDir: "${work_directory}",
         tfVar: "${tf_var_file}",
         backendConfigFile: "${backend_config_file}",
         awsRoleArn: "${aws_role_arn}"
-    ],
-    snyk: [
-        orgId: "${org_id}"
     ]
 ] 
-@Library("dso-shared-lib@develop") _
+@Library("dso-shared-lib@refine-terraform1.6-srvpipe") _
 def podYaml = libraryResource "podTemplates/terraform-agent.yaml"
 pipeline {
     agent{
@@ -62,12 +57,18 @@ pipeline {
     post {
         success {
             script{
-                notification.success(properties)
+                if (properties.slackNotification && (properties.slackNotification != "#example-channel")) {
+                    notification.success(properties)
+                    slackSend(channel: "${properties.slackNotification}", message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully. See details: ${env.BUILD_URL}")
+                }
             }
         }
         failure {
             script{
-                notification.failure(properties)
+                if (properties.slackNotification && (properties.slackNotification != "#example-channel")) {
+                    notification.failure(properties)
+                    slackSend(channel: "${properties.slackNotification}", message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed. Check it out: ${env.BUILD_URL}")
+                }
             }
         }
     }
