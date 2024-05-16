@@ -52,5 +52,9 @@ multibranch:
       repoOwner: ${gh_org}
       repository: ${github_repo}
       credentialsId: "git_token"
+      traits:
+      - class: "jenkins.branch.BranchNameFilterTrait"
+        includes: "dotnetcore6.6-std"
+        excludes: ""
   orphanedItemStrategy:
     daysToKeep: 3
