@@ -90,7 +90,7 @@ multibranch:
       credentialsId: "git_token"
       traits:
         - $class: "jenkins.plugins.git.traits.CleanBeforeCheckoutTrait"  # Clean before checkout
-        - $class: "jenkins.scm.impl.trait.WildcardSCMSourceFilterTrait"  # Include only the specified branch
+        - $class: "jenkins.scm.impl.trait.RegexSCMSourceFilterTrait"  # Include only the specified branch
           includes: 'gradle-java11-std'
           excludes: '*'  # No branches to exclude since we only want to include one
     strategy:
