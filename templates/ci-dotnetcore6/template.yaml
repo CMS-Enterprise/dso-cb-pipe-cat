@@ -55,17 +55,16 @@ multibranch:
     #   includes: 
     #    - dotnetcore6.6-std
   branchSource:
-    source:
-      fromScm:
-        name: ''
-        scm:
-          scmGit:
-            userRemoteConfigs:
-            - userRemoteConfig:
-                credentialsId: "git_token"
-                url: https://github.com/${gh_org}/${github_repo}
-            branches:
-            - branchSpec:
-                name: 'dotnetcore6.6-std'     
+    fromScm:
+      name: ''
+      scm:
+        scmGit:
+          userRemoteConfigs:
+          - userRemoteConfig:
+              credentialsId: "git_token"
+              url: https://github.com/${gh_org}/${github_repo}
+          branches:
+          - branchSpec:
+              name: 'dotnetcore6.6-std'     
   orphanedItemStrategy:
     daysToKeep: 3
