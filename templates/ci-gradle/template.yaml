@@ -83,7 +83,7 @@ parameters:
 #   orphanedItemStrategy:
 #     daysToKeep: 3
 
-  multibranch:
+multibranch:
   branchSource:
     git:
       remote: 'https://github.com/${gh_org}/${github_repo}.git'
