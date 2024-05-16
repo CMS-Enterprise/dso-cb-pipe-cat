@@ -54,8 +54,9 @@ multibranch:
       credentialsId: "git_token"
       traits:
         - $class: "jenkins.branch.BranchDiscoveryTrait" 
-        - $class: "jenkins.scm.impl.trait.DiscoverOtherRefsTrait"
-          ref: 'refs/heads/dotnetcore6-std' 
+          strategyId: 3 
+        - $class: "jenkins.scm.impl.trait.RegexSCMHeadFilterTrait"
+          regex: "^dotnetcore6-std$"
         - $class: "jenkins.scm.impl.trait.CleanBeforeCheckoutTrait" 
     # git:
     #   remote: 'https://github.com/${gh_org}/${github_repo}.git'
