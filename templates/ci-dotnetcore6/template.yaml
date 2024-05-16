@@ -48,21 +48,24 @@ multibranch:
   branchSource:
     # git:
       # remote: ${github_repo}
-    # github:
-    #   repoOwner: ${gh_org}
-    #   repository: ${github_repo}
-    #   credentialsId: "git_token"
-    #   includes: 
-    #    - dotnetcore6.6-std
-    git:
-      remote: 'https://github.com/${gh_org}/${github_repo}.git'
-      credentialsId: 'git_token'
+    github:
+      repoOwner: ${gh_org}
+      repository: ${github_repo}
+      credentialsId: "git_token"
       traits:
-        - gitBranchDiscovery
-        - $class: DiscoverOtherRefsTrait
-          ref: 'refs/heads/dotnetcore6-std'
-        - cleanBeforeCheckout
-        - $class: GitBrowserSCMSourceTrait
+        - $class: "jenkins.branch.BranchDiscoveryTrait" 
+        - $class: "jenkins.scm.impl.trait.DiscoverOtherRefsTrait"
+          ref: 'refs/heads/dotnetcore6-std' 
+        - $class: "jenkins.scm.impl.trait.CleanBeforeCheckoutTrait" 
+    # git:
+    #   remote: 'https://github.com/${gh_org}/${github_repo}.git'
+    #   credentialsId: 'git_token'
+    #   traits:
+    #     - gitBranchDiscovery
+    #     - $class: DiscoverOtherRefsTrait
+    #       ref: 'refs/heads/dotnetcore6-std'
+    #     - cleanBeforeCheckout
+    #     - $class: GitBrowserSCMSourceTrait
   # branchSource:
   #   fromScm:
   #     name: ''
