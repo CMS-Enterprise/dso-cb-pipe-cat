@@ -52,11 +52,11 @@ parameters:
    
 multibranch:
   branchSource:
-    # git:
-      # remote: ${github_repo}
     github:
       repoOwner: ${gh_org}
       repository: ${github_repo}
       credentialsId: "git_token"
+    includes:
+      - gradle-java11-std
   orphanedItemStrategy:
     daysToKeep: 3
