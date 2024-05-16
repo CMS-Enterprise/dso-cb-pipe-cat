@@ -45,14 +45,27 @@ parameters:
     displayName: Name of the Docker file
    
 multibranch:
-  branchSource:
+  # branchSource:
     # git:
       # remote: ${github_repo}
-    github:
-      repoOwner: ${gh_org}
-      repository: ${github_repo}
-      credentialsId: "git_token"
-      includes: 
-       - dotnetcore6.6-std
+    # github:
+    #   repoOwner: ${gh_org}
+    #   repository: ${github_repo}
+    #   credentialsId: "git_token"
+    #   includes: 
+    #    - dotnetcore6.6-std
+  branchSource:
+    source:
+      fromScm:
+        name: ''
+        scm:
+          scmGit:
+            userRemoteConfigs:
+            - userRemoteConfig:
+                credentialsId: "git_token"
+                url: https://github.com/${gh_org}/${github_repo}
+            branches:
+            - branchSpec:
+                name: 'dotnetcore6.6-std'     
   orphanedItemStrategy:
     daysToKeep: 3
