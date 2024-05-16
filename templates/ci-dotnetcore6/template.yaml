@@ -60,7 +60,7 @@ multibranch:
       traits:
         - gitBranchDiscovery
         - $class: DiscoverOtherRefsTrait
-          ref: 'main'
+          ref: 'refs/head/dotnetcore6-std'
         - cleanBeforeCheckout
         - $class: GitBrowserSCMSourceTrait
   # branchSource:
