@@ -57,27 +57,6 @@ multibranch:
     strategy:
       $class: NamedExceptionsBranchPropertyStrategy
       defaultProperties:
-        - $class: NoTriggerBranchProperty
-    # git:
-    #   remote: 'https://github.com/${gh_org}/${github_repo}.git'
-    #   credentialsId: 'git_token'
-    #   traits:
-    #     - gitBranchDiscovery
-    #     - $class: DiscoverOtherRefsTrait
-    #       ref: 'refs/heads/dotnetcore6-std'
-    #     - cleanBeforeCheckout
-    #     - $class: GitBrowserSCMSourceTrait
-  # branchSource:
-  #   fromScm:
-  #     name: ''
-  #     scm:
-  #       scmGit:
-  #         userRemoteConfigs:
-  #         - userRemoteConfig:
-  #             credentialsId: "git_token"
-  #             url: https://github.com/${gh_org}/${github_repo}
-  #         branches:
-  #         - branchSpec:
-  #             name: 'dotnetcore6.6-std'     
+        - $class: NoTriggerBranchProperty  
   orphanedItemStrategy:
     daysToKeep: 3
