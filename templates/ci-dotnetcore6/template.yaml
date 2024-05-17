@@ -46,8 +46,6 @@ parameters:
    
 multibranch:
   branchSource:
-    # git:
-      # remote: ${github_repo}
     git:
       remote: 'https://github.com/${gh_org}/${github_repo}.git'
       credentialsId: "git_token"
@@ -59,7 +57,7 @@ multibranch:
     strategy:
       $class: NamedExceptionsBranchPropertyStrategy
       defaultProperties:
-        - $class: NoTriggerBranchPropertyt" 
+        - $class: NoTriggerBranchProperty
     # git:
     #   remote: 'https://github.com/${gh_org}/${github_repo}.git'
     #   credentialsId: 'git_token'
