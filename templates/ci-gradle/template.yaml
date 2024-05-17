@@ -102,7 +102,7 @@ multibranch:
       #   - name: "gradle-java11-std"
       defaultProperties:
         - $class: NoTriggerBranchProperty
-    buildStrategies:
-      - $class: SkipInitialBuildOnFirstBranchIndexing
+    # buildStrategies:
+    #   - $class: SkipInitialBuildOnFirstBranchIndexing
   orphanedItemStrategy:
     daysToKeep: 3
