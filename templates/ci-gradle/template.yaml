@@ -97,7 +97,7 @@ multibranch:
     # Keep the strategy this is awesome, it stops the pipelines from running everytime we update the catalog
     # Doesn't keep the branches from getting pulled tho
     strategy:
-      # $class: NamedExceptionsBranchPropertyStrategy
+      $class: NamedExceptionsBranchPropertyStrategy
       # namedExceptions:
       #   - name: "gradle-java11-std"
       defaultProperties:
