@@ -93,7 +93,7 @@ multibranch:
         - $class: "jenkins.plugins.git.traits.BranchDiscoveryTrait"  # Discover branches
         - $class: "jenkins.plugins.git.traits.CleanBeforeCheckoutTrait"  # Clean before checkout
         - $class: "jenkins.scm.impl.trait.RegexSCMHeadFilterTrait"  # Use regex to include only the specified branch
-          regex: 'refs/heads/gradle-java11-std'
+          regex: 'gradle-java11-std'
     # Keep the strategy this is awesome, it stops the pipelines from running everytime we update the catalog
     # Doesn't keep the branches from getting pulled tho
     strategy:
