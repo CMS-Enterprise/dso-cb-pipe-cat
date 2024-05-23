@@ -17,14 +17,20 @@ parameters:
   - name: gh_org
     type: string
     displayName: Name of your Github Org
-  - name: aws_role_arn
+  - name: ado_iam_role
     type: string
-    default: arn:aws:iam::280350076387:role/delegatedadmin/developer/jenkins-role
-    displayName: Provide AWS service account role arn
+    displayName: IAM Role ARN to be assumed in ADO owned AWS account
+    defaultValue: arn:aws:iam::280350076387:role/delegatedadmin/developer/jenkins-role-EXAMPLE
   - name: work_directory
     type: string
     displayName: Relative location of the application working directory
     defaultValue: .
+  - name: test_args
+    type: string
+    displayName: Extra arguments for terraform test
+  - name: build_args
+    type: string
+    displayName: Extra arguments for terraform plan and apply
   - name: tf_var_file
     type: string
     displayName: Path and name of the tf var files

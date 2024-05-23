@@ -4,11 +4,11 @@ def Map properties=[
     ghOrg: "${gh_org}",
     buildArgs: "${build_args}",
     testArgs: "${test_args}",
+    adoIAMRole: "${ado_iam_role}",
     deploy: [
         workDir: "${work_directory}",
         tfVar: "${tf_var_file}",
-        backendConfigFile: "${backend_config_file}",
-        awsRoleArn: "${aws_role_arn}"
+        backendConfigFile: "${backend_config_file}"
     ]
 ] 
 def sharedLibraryBranch
@@ -33,29 +33,56 @@ pipeline {
                 }
             }
         }
-         stage ("tfinit"){
+        stage ("aws"){
             steps {
-                container ("base-agent"){
+                container ("awscli"){
                     script{
-                        terraform.init(properties.deploy)
+                        aws.assumeRole(properties.adoIAMRole)
                     }
                 }
             }
         }
-         stage ("tfplan"){
+        stage ("tfinit"){
             steps {
-                container ("base-agent"){
+                container ("tfenv"){
                     script{
-                        terraform.plan(properties.deploy)
+                        terraform.init(properties)
                     }
                 }
             }
         }
-         stage ("tfapply"){
+        stage ("tftest"){
             steps {
-                container ("base-agent"){
+                container ("tfenv"){
+                    script{
+                        terraform.test(properties)
+                    }
+                }
+            }
+        }   
+        stage ("tfplan"){
+            steps {
+                container ("tfenv"){
+                    script{
+                        terraform.plan(properties)
+                    }
+                }
+            }
+        }
+        stage ("tfapply"){
+            steps {
+                container ("tfenv"){
                     script{               
-                        terraform.apply(properties.deploy)
+                        terraform.apply(properties)
+                    }
+                }
+            }
+        }
+        stage ("tfdestroy"){
+            steps {
+                container ("tfenv"){
+                    script{               
+                        terraform.destroy(properties)
                     }
                 }
             }
