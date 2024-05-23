@@ -40,8 +40,8 @@ multibranch:
       traits:
         - $class: "jenkins.plugins.git.traits.BranchDiscoveryTrait"
         - $class: "jenkins.plugins.git.traits.CleanBeforeCheckoutTrait"
-        - $class: "jenkins.scm.impl.trait.RegexSCMHeadFilterTrait"
-          regex: 'terraform1.6-std'
+        # - $class: "jenkins.scm.impl.trait.RegexSCMHeadFilterTrait"
+        #   regex: 'terraform1.6-std'
     strategy:
       $class: NamedExceptionsBranchPropertyStrategy
       defaultProperties:

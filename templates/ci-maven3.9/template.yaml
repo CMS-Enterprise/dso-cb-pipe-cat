@@ -75,8 +75,8 @@ multibranch:
       traits:
         - $class: "jenkins.plugins.git.traits.BranchDiscoveryTrait"
         - $class: "jenkins.plugins.git.traits.CleanBeforeCheckoutTrait"
-        - $class: "jenkins.scm.impl.trait.RegexSCMHeadFilterTrait"
-          regex: 'maven3.9-java11-std'
+        # - $class: "jenkins.scm.impl.trait.RegexSCMHeadFilterTrait"
+        #   regex: 'maven3.9-java11-std'
     strategy:
       $class: NamedExceptionsBranchPropertyStrategy
       defaultProperties:
