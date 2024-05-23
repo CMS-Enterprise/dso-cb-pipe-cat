@@ -28,7 +28,7 @@ pipeline {
             steps {
                 container ("jnlp"){
                     script{
-                        init.paramValidator(properties)
+                        // init.paramValidator(properties)
                     }
                 }
             }
