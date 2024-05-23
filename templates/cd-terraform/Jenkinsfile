@@ -78,15 +78,6 @@ pipeline {
                 }
             }
         }
-        stage ("tfdestroy"){
-            steps {
-                container ("tfenv"){
-                    script{               
-                        terraform.destroy(properties)
-                    }
-                }
-            }
-        }
     }
     post {
         success {
