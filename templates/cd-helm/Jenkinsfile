@@ -9,7 +9,11 @@ def Map properties=[
         workDir: "${work_directory}"
     ]
 ] 
-@Library("dso-shared-lib@develop") _
+def sharedLibraryBranch
+if (env.devopsDebugOverridesSharedLibraryBranch){ sharedLibraryBranch = env.devopsDebugOverridesSharedLibraryBranch }
+else { sharedLibraryBranch = "main" }
+
+library "dso-shared-lib@${sharedLibraryBranch}"
 def podYaml = libraryResource "podTemplates/helm-agent.yaml"
 pipeline {
     agent{

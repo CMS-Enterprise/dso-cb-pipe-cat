@@ -2,6 +2,8 @@ def Map properties=[
     tech: "terraform",
     slackNotification: "${slack_notification}",
     ghOrg: "${gh_org}",
+    buildArgs: "${build_args}",
+    testArgs: "${test_args}",
     deploy: [
         workDir: "${work_directory}",
         tfVar: "${tf_var_file}",
@@ -9,7 +11,11 @@ def Map properties=[
         awsRoleArn: "${aws_role_arn}"
     ]
 ] 
-@Library("dso-shared-lib@refine-terraform1.6-srvpipe") _
+def sharedLibraryBranch
+if (env.devopsDebugOverridesSharedLibraryBranch){ sharedLibraryBranch = env.devopsDebugOverridesSharedLibraryBranch }
+else { sharedLibraryBranch = "main" }
+
+library "dso-shared-lib@${sharedLibraryBranch}"
 def podYaml = libraryResource "podTemplates/terraform-agent.yaml"
 pipeline {
     agent{
