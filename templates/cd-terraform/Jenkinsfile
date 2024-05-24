@@ -70,10 +70,24 @@ pipeline {
             }
         }
         stage ("tfapply"){
+            input {
+                message "Proceed with apply?"
+                ok "Proceed"
+            }
             steps {
                 container ("tfenv"){
                     script{               
                         terraform.apply(properties)
+                    }
+                }
+            }
+        }
+        // FOR TESTING PURPOSES ONLY
+        stage ("tfdestroy"){
+            steps {
+                container ("tfenv"){
+                    script{               
+                        terraform.destroy(properties)
                     }
                 }
             }
