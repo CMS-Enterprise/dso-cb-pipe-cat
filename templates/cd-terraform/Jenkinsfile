@@ -4,11 +4,11 @@ def Map properties=[
     ghOrg: "${gh_org}",
     buildArgs: "${build_args}",
     testArgs: "${test_args}",
+    adoIAMRole: "${ado_iam_role}",
     deploy: [
         workDir: "${work_directory}",
         tfVar: "${tf_var_file}",
-        backendConfigFile: "${backend_config_file}",
-        awsRoleArn: "${aws_role_arn}"
+        backendConfigFile: "${backend_config_file}"
     ]
 ] 
 def sharedLibraryBranch
@@ -27,35 +27,67 @@ pipeline {
         stage ("init"){
             steps {
                 container ("jnlp"){
+                    // script{
+                    //     init.paramValidator(properties)
+                    // }
+                }
+            }
+        }
+        stage ("aws"){
+            steps {
+                container ("awscli"){
                     script{
-                        init.paramValidator(properties)
+                        aws.assumeRole(properties.adoIAMRole)
                     }
                 }
             }
         }
-         stage ("tfinit"){
+        stage ("tfinit"){
             steps {
-                container ("base-agent"){
+                container ("tfenv"){
                     script{
-                        terraform.init(properties.deploy)
+                        terraform.init(properties)
                     }
                 }
             }
         }
-         stage ("tfplan"){
+        stage ("tftest"){
             steps {
-                container ("base-agent"){
+                container ("tfenv"){
                     script{
-                        terraform.plan(properties.deploy)
+                        terraform.test(properties)
+                    }
+                }
+            }
+        }   
+        stage ("tfplan"){
+            steps {
+                container ("tfenv"){
+                    script{
+                        terraform.plan(properties)
                     }
                 }
             }
         }
-         stage ("tfapply"){
+        stage ("tfapply"){
+            input {
+                message "Proceed with apply?"
+                ok "Proceed"
+            }
             steps {
-                container ("base-agent"){
+                container ("tfenv"){
                     script{               
-                        terraform.apply(properties.deploy)
+                        terraform.apply(properties)
+                    }
+                }
+            }
+        }
+        // FOR TESTING PURPOSES ONLY
+        stage ("tfdestroy"){
+            steps {
+                container ("tfenv"){
+                    script{               
+                        terraform.destroy(properties)
                     }
                 }
             }
