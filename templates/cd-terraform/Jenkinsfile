@@ -65,6 +65,31 @@ pipeline {
                     }
                 }
             }
+        }
+        stage ("sonarqube scan"){
+            when {
+                expression { return properties.sonarqube.projectKey }
+            }
+            steps {
+                container ("sonarqube"){
+                    script{               
+                        sonarqube.scan(properties)
+                    }
+                }
+            }
+        }
+        stage ("snyk"){
+            when {
+                expression { return properties.snyk.orgId }
+            }
+            steps {
+                container ("snyk"){
+                    script{         
+                        snyk.snykCodeTest(properties)       
+                        snyk.snykTest(properties)
+                    }
+                }
+            }
         }   
         stage ("tfplan"){
             steps {
