@@ -81,5 +81,6 @@ multibranch:
       $class: NamedExceptionsBranchPropertyStrategy
       defaultProperties:
         - $class: NoTriggerBranchProperty  
+  scanRepositoryInterval: 15 minutes
   orphanedItemStrategy:
     daysToKeep: 3
