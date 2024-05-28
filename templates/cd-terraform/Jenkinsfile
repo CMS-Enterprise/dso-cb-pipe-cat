@@ -33,9 +33,9 @@ pipeline {
         stage ("init"){
             steps {
                 container ("jnlp"){
-                    // script{
-                    //     init.paramValidator(properties)
-                    // }
+                    script{
+                        init.terraformParamValidator(properties)
+                    }
                 }
             }
         }
