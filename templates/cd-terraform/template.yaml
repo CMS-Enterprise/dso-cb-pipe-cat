@@ -37,6 +37,12 @@ parameters:
   - name: backend_config_file
     type: string
     displayName: Path and name of the backend config file
+  - name: sq_project_key
+    type: string
+    displayName: SonarQube project key
+  - name: org_id
+    type: string
+    displayName: Snyk Org ID
    
 multibranch:
   branchSource:

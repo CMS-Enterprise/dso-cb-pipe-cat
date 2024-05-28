@@ -9,6 +9,12 @@ def Map properties=[
         workDir: "${work_directory}",
         tfVar: "${tf_var_file}",
         backendConfigFile: "${backend_config_file}"
+    ],
+    snyk: [
+        orgId: "${org_id}"
+    ],
+    sonarqube: [
+        projectKey: "${sq_project_key}"
     ]
 ] 
 def sharedLibraryBranch
