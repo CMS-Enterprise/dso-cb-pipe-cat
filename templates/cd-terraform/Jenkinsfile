@@ -78,19 +78,6 @@ pipeline {
                 }
             }
         }
-        stage ("snyk"){
-            when {
-                expression { return properties.snyk.orgId }
-            }
-            steps {
-                container ("snyk"){
-                    script{         
-                        snyk.snykCodeTest(properties)       
-                        snyk.snykTest(properties)
-                    }
-                }
-            }
-        }   
         stage ("tfplan"){
             steps {
                 container ("tfenv"){
@@ -100,6 +87,18 @@ pipeline {
                 }
             }
         }
+        stage ("snyk"){
+            when {
+                expression { return properties.snyk.orgId }
+            }
+            steps {
+                container ("snyk"){
+                    script{         
+                        snyk.snykIac(properties)
+                    }
+                }
+            }
+        }   
         stage ("tfapply"){
             input {
                 message "Proceed with apply?"
