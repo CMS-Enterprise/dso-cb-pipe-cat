@@ -114,15 +114,15 @@ pipeline {
             }
         }
         // FOR TESTING PURPOSES ONLY
-        // stage ("tfdestroy"){
-        //     steps {
-        //         container ("tfenv"){
-        //             script{               
-        //                 terraform.destroy(properties)
-        //             }
-        //         }
-        //     }
-        // }
+        stage ("tfdestroy"){
+            steps {
+                container ("tfenv"){
+                    script{               
+                        terraform.destroy(properties)
+                    }
+                }
+            }
+        }
     }
     post {
         success {
