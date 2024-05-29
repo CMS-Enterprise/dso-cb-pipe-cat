@@ -78,15 +78,6 @@ pipeline {
                 }
             }
         }
-        stage ("tfplan"){
-            steps {
-                container ("tfenv"){
-                    script{
-                        terraform.plan(properties)
-                    }
-                }
-            }
-        }
         stage ("snyk"){
             when {
                 expression { return properties.snyk.orgId }
@@ -99,6 +90,15 @@ pipeline {
                 }
             }
         }   
+        stage ("tfplan"){
+            steps {
+                container ("tfenv"){
+                    script{
+                        terraform.plan(properties)
+                    }
+                }
+            }
+        }
         stage ("tfapply"){
             input {
                 message "Proceed with apply?"
