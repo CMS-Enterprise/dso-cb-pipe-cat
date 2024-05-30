@@ -9,6 +9,12 @@ def Map properties=[
         workDir: "${work_directory}",
         tfVar: "${tf_var_file}",
         backendConfigFile: "${backend_config_file}"
+    ],
+    snyk: [
+        orgId: "${org_id}"
+    ],
+    sonarqube: [
+        projectKey: "${sq_project_key}"
     ]
 ] 
 def sharedLibraryBranch
@@ -27,9 +33,9 @@ pipeline {
         stage ("init"){
             steps {
                 container ("jnlp"){
-                    // script{
-                    //     init.paramValidator(properties)
-                    // }
+                    script{
+                        init.terraformParamValidator(properties)
+                    }
                 }
             }
         }
@@ -56,6 +62,30 @@ pipeline {
                 container ("tfenv"){
                     script{
                         terraform.test(properties)
+                    }
+                }
+            }
+        }
+        stage ("sonarqube scan"){
+            when {
+                expression { return properties.sonarqube.projectKey }
+            }
+            steps {
+                container ("sonarqube"){
+                    script{               
+                        sonarqube.scan(properties)
+                    }
+                }
+            }
+        }
+        stage ("snyk"){
+            when {
+                expression { return properties.snyk.orgId }
+            }
+            steps {
+                container ("snyk"){
+                    script{         
+                        snyk.snykIac(properties)
                     }
                 }
             }
