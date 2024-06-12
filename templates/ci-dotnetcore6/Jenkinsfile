@@ -140,7 +140,7 @@ pipeline {
             script{
                 if (properties.slackNotification && (properties.slackNotification != "#example-channel")) {
                     notification.failure(properties)
-                    slackSend(channel: "${properties.slackNotification}", message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed. Check it out: ${env.BUILD_URL}")
+                    slackSend(channel: "${properties.slackNotification}", color: "#FF0000", message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed. Check it out: ${env.BUILD_URL}")
                 }
             }
         } 
