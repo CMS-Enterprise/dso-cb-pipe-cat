@@ -96,6 +96,7 @@ pipeline {
                     script{         
                         snyk.snykCodeTest(properties)       
                         snyk.snykTest(properties)
+                        snyk.snykSbom(properties)
                     }
                 }
             }
