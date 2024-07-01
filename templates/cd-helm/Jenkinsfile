@@ -30,7 +30,7 @@ pipeline {
                 }
             }
         }
-        stage ("init"){
+        stage ("Init"){
             steps {
                 container ("jnlp"){
                     sh "echo init"
@@ -45,7 +45,7 @@ pipeline {
                 } 
             }
         }
-        stage ("post-deploy maven test") {
+        stage ("Post-deploy maven test") {
             when { expression { tech.contains("maven") }}
             steps {
                 container ("maven") {
@@ -55,7 +55,7 @@ pipeline {
                 }
             }
         }
-        stage ("post-deploy dotnet test") {
+        stage ("Post-deploy dotnet test") {
             when { expression { tech.contains("dotnet") }}
             steps {
                 container ("dotnet") {
@@ -65,7 +65,7 @@ pipeline {
                 }
             }
         }
-        stage ("post-deploy gradle test") {
+        stage ("Post-deploy gradle test") {
             when { expression { tech.contains("gradle") }}
             steps {
                 container ("gradle") {

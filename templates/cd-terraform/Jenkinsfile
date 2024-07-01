@@ -30,7 +30,7 @@ pipeline {
         }
     }
     stages{
-        stage ("init"){
+        stage ("Init"){
             steps {
                 container ("jnlp"){
                     script{
@@ -39,7 +39,7 @@ pipeline {
                 }
             }
         }
-        stage ("aws"){
+        stage ("AWS Assume Role"){
             steps {
                 container ("awscli"){
                     script{
@@ -48,7 +48,7 @@ pipeline {
                 }
             }
         }
-        stage ("tfinit"){
+        stage ("tf init"){
             steps {
                 container ("tfenv"){
                     script{
@@ -57,7 +57,7 @@ pipeline {
                 }
             }
         }
-        stage ("tftest"){
+        stage ("tf test"){
             steps {
                 container ("tfenv"){
                     script{
@@ -66,7 +66,7 @@ pipeline {
                 }
             }
         }
-        stage ("sonarqube scan"){
+        stage ("Sonarqube"){
             when {
                 expression { return properties.sonarqube.projectKey }
             }
@@ -78,7 +78,7 @@ pipeline {
                 }
             }
         }
-        stage ("snyk"){
+        stage ("Snyk"){
             when {
                 expression { return properties.snyk.orgId }
             }
@@ -90,7 +90,7 @@ pipeline {
                 }
             }
         }   
-        stage ("tfplan"){
+        stage ("tf plan"){
             steps {
                 container ("tfenv"){
                     script{
@@ -99,7 +99,7 @@ pipeline {
                 }
             }
         }
-        stage ("tfapply"){
+        stage ("tf apply"){
             input {
                 message "Proceed with apply?"
                 ok "Proceed"

@@ -40,7 +40,7 @@ pipeline {
         }
     }
     stages{
-        stage ("init"){
+        stage ("Init"){
             steps {
                 container ("jnlp"){
                     script{
@@ -77,7 +77,7 @@ pipeline {
                 }
             }
         }
-         stage ("sonarqube scan"){
+         stage ("Sonarqube"){
             when {
                 expression { return properties.sonarqube.projectKey }
             }
@@ -89,7 +89,7 @@ pipeline {
                 }
             }
         }
-         stage ("snyk"){
+         stage ("Snyk"){
             when {
                 expression { return properties.snyk.orgId }
             }
@@ -102,7 +102,7 @@ pipeline {
                 }
             }
         }
-        stage('Artifactory Publish') {
+        stage('Artifact Publish') {
             steps {
                 container ("awscli"){
                     script{
@@ -129,7 +129,7 @@ pipeline {
                 }
             }
         }
-         stage ("jfrog xray"){
+         stage ("JFrog Xray"){
             steps {
                 container ("jfrog"){
                     script{               
