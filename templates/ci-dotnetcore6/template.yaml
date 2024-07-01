@@ -62,6 +62,10 @@ parameters:
     type: string
     displayName: Name of the build zip file (required if zip upload)
     defaultValue: example.zip
+  - name: cache_flag
+    type: string
+    displayName: Enable caching for kaniko? (true/false)
+    defaultValue: true
    
 multibranch:
   branchSource:
