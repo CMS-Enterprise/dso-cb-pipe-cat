@@ -105,12 +105,6 @@ pipeline {
             }
         }
         stage('Artifactory Publish') {
-          when {
-            anyOf {
-              expression { GIT_BRANCH == "main" }
-              expression { GIT_BRANCH == "master" }
-            }
-          }
             steps {
                 container ("awscli"){
                     script{
@@ -138,12 +132,6 @@ pipeline {
             }
         }
         stage ("jfrog xray"){
-          when {
-            anyOf {
-              expression { GIT_BRANCH == "main" }
-              expression { GIT_BRANCH == "master" }
-            }
-          }
           steps {
                 container ("jfrog"){
                     script{               
