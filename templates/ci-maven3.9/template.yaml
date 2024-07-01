@@ -45,12 +45,12 @@ parameters:
   - name: sq_project_key
     type: string
     displayName: SonarQube project key
-  - name: docker_args
-    type: string
-    displayName: Docker arguments
   - name: org_id
     type: string
     displayName: Snyk Org ID
+  - name: docker_args
+    type: string
+    displayName: Docker arguments
   - name: work_directory
     type: string
     displayName: Relative location of the application working directory
@@ -66,6 +66,10 @@ parameters:
     type: string
     displayName: Name of the build zip file (required if zip upload)
     defaultValue: example.zip
+  - name: cache_flag
+    type: string
+    displayName: Enable caching for kaniko? (true/false)
+    defaultValue: true
    
 multibranch:
   branchSource:

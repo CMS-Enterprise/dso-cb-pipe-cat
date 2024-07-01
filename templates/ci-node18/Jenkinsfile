@@ -19,7 +19,8 @@ def Map properties=[
         workDir: "${work_directory}",
         dockerFile: "${docker_file}",
         zipPath: "${zip_path}",
-        fileName: "${file_name}"
+        fileName: "${file_name}",
+        cacheFlag: "${cache_flag}"
     ],
     snyk: [
         orgId: "${org_id}"
@@ -49,6 +50,9 @@ pipeline {
             }
         }
          stage ("npm ci"){
+            when {
+                expression { return properties.ciArgs }
+            }
             steps {
                 container ("node"){
                     script{
@@ -101,12 +105,6 @@ pipeline {
             }
         }
         stage('Artifactory Publish') {
-          when {
-            anyOf {
-              expression { GIT_BRANCH == "main" }
-              expression { GIT_BRANCH == "master" }
-            }
-          }
             steps {
                 container ("awscli"){
                     script{
@@ -134,12 +132,6 @@ pipeline {
             }
         }
         stage ("jfrog xray"){
-          when {
-            anyOf {
-              expression { GIT_BRANCH == "main" }
-              expression { GIT_BRANCH == "master" }
-            }
-          }
           steps {
                 container ("jfrog"){
                     script{               
