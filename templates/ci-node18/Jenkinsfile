@@ -50,6 +50,9 @@ pipeline {
             }
         }
          stage ("npm ci"){
+            when {
+                expression { return properties.ciArgs }
+            }
             steps {
                 container ("node"){
                     script{
