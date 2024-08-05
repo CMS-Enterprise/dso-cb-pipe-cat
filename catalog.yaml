@@ -1,5 +1,5 @@
-version: 1
+version: 2
 type: pipeline-template-catalog
 
-name: cmsstandardizepipelines
-displayName: CMS Standardize Pipelines
+name: cmsstandardizeexamplepipelines
+displayName: CMS Standardize Example Pipelines
