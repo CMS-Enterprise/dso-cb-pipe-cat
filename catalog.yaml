@@ -1,6 +1,6 @@
 version: 1
 type: pipeline-template-catalog
 
-name: standardizeexamplepipelines
+name: examplepipelines
 description: README > [CloudBees Jenkins CI/CD Service Catalog] (https://confluenceent.cms.gov/pages/viewpage.action?pageId=611726126) 
-displayName: Standardize Example Pipelines
+displayName: Example Pipelines
